@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
   # Relations
-  belongs_to :user
+  belongs_to :author, class_name: 'User'
   has_many :recipe_ingredients
   has_many :ingredients, through: :recipe_ingredients
   has_many :reviews

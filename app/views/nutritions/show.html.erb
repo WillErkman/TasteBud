@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @nutrition %>
+
+<div>
+  <%= link_to "Edit this nutrition", edit_nutrition_path(@nutrition) %> |
+  <%= link_to "Back to nutritions", nutritions_path %>
+
+  <%= button_to "Destroy this nutrition", @nutrition, method: :delete %>
+</div>

@@ -1,0 +1,17 @@
+<%= form_with(model: nutrition) do |form| %>
+  <% if nutrition.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(nutrition.errors.count, "error") %> prohibited this nutrition from being saved:</h2>
+
+      <ul>
+        <% nutrition.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
