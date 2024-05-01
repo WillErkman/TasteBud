@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # Relations
+  has_many :recipes
+  has_many :reviews
 
   # Validations
   validates :username, presence: true, uniqueness: true, length: { maximum: 20 }
