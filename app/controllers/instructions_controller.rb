@@ -65,6 +65,6 @@ class InstructionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def instruction_params
-      params.fetch(:instruction, {})
+      params.fetch(:instruction, {}).permit(:instruction_section_id, :content, :order)
     end
 end
