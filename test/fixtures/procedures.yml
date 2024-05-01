@@ -1,11 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  instruction_section: one
+  section: one
   content: MyText
-  order: 1
 
 two:
-  instruction_section: two
+  section: two
   content: MyText
-  order: 1

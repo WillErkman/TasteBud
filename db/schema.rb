@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_112820) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_224312) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -48,27 +48,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_112820) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "ingredient_lists", force: :cascade do |t|
+    t.integer "ingredient_id"
+    t.integer "section_id"
+    t.string "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_ingredient_lists_on_ingredient_id"
+    t.index ["section_id"], name: "index_ingredient_lists_on_section_id"
+  end
+
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "instruction_sections", force: :cascade do |t|
-    t.string "title"
-    t.integer "recipe_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_instruction_sections_on_recipe_id"
-  end
-
-  create_table "instructions", force: :cascade do |t|
-    t.integer "instruction_section_id", null: false
-    t.text "content"
-    t.integer "order"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["instruction_section_id"], name: "index_instructions_on_instruction_section_id"
   end
 
   create_table "nutritions", force: :cascade do |t|
@@ -87,15 +80,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_112820) do
     t.index ["recipe_id"], name: "index_nutritions_on_recipe_id"
   end
 
-  create_table "recipe_ingredients", force: :cascade do |t|
-    t.integer "recipe_id", null: false
-    t.integer "ingredient_id", null: false
-    t.decimal "quantity"
-    t.string "unit"
+  create_table "procedures", force: :cascade do |t|
+    t.integer "section_id", null: false
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
-    t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
+    t.index ["section_id"], name: "index_procedures_on_section_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -129,6 +119,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_112820) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_sections_on_recipe_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -151,12 +150,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_112820) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "instruction_sections", "recipes"
-  add_foreign_key "instructions", "instruction_sections"
+  add_foreign_key "ingredient_lists", "ingredients"
+  add_foreign_key "ingredient_lists", "sections"
   add_foreign_key "nutritions", "recipes"
-  add_foreign_key "recipe_ingredients", "ingredients"
-  add_foreign_key "recipe_ingredients", "recipes"
+  add_foreign_key "procedures", "sections"
   add_foreign_key "recipes", "users"
   add_foreign_key "reviews", "recipes"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sections", "recipes"
 end

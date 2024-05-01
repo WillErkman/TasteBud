@@ -1,6 +1,6 @@
 require "test_helper"
 
-class InstructionSectionTest < ActiveSupport::TestCase
+class IngredientListTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

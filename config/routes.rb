@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :procedures
   # Defines the root path route ("/")
   root "static_pages#home"
   
