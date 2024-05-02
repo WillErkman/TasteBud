@@ -1,11 +1,13 @@
-USERS_COUNT = 10       # Number of Users
-RECIPES_COUNT = 5      # Number of Recipes per User
-SECTIONS_COUNT = 1     # Number of Sections/Procedures/IngredientLists per Recipe
-INGREDIENT_COUNT = 8   # Number of Ingredients per Recipe/Section/IngredientList
-TAGS_COUNT = 3         # Number of Tags per Recipe
-REVIEWS_COUNT = 4      # Number of Reviews per Recipe
-ADMIN = User.create!(username: "Admin", email: "admin@admin.com", password: "admin1", admin: true) # Administrator
+#  Resource Sizes and Special Resources
+USERS_COUNT = 10 # Number of Users
+RECIPES_COUNT = 5 # Number of Recipes per User
+SECTIONS_COUNT = 1 # Number of Sections/Procedures/IngredientLists per Recipe
+INGREDIENT_COUNT = 8 # Number of Ingredients per Recipe/Section/IngredientList
+TAGS_COUNT = 3 # Number of Tags per Recipe
+REVIEWS_COUNT = 4 # Number of Reviews per Recipe
+ADMIN_PARAMS = { username: "Admin", email: "admin@admin.com", password: "admin1", admin: true } # Administrator info
 
+#  Parameter creation methods
 def ingredient_lists_params # Returns array of populated IngredientList params hashes
 	INGREDIENT_COUNT.times.map do |i|
 		{ quantity: Faker::Food.measurement,
@@ -77,6 +79,7 @@ USERS_COUNT.times do
 	end
 end
 
+# Create REVIEWS_COUNT Reviews from randomly selected users for each recipe
 Recipe.all.each do |recipe|
 	users_ids = REVIEWS_COUNT.times.map do
 		Faker::Number.unique.between(from: 1, to: USERS_COUNT)
@@ -87,6 +90,9 @@ Recipe.all.each do |recipe|
 		recipe.reviews.create!(review_params(user))
 	end
 end
+
+# Create Admin
+User.create!(ADMIN_PARAMS)
 
 
 
