@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_02_004602) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_02_010845) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -95,10 +95,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_004602) do
     t.string "total_time"
     t.text "description"
     t.string "yield"
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_recipes_on_user_id"
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_recipes_on_author_id"
   end
 
   create_table "recipes_tags", id: false, force: :cascade do |t|
@@ -155,7 +155,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_004602) do
   add_foreign_key "ingredient_lists", "sections"
   add_foreign_key "nutritions", "recipes"
   add_foreign_key "procedures", "sections"
-  add_foreign_key "recipes", "users"
+  add_foreign_key "recipes", "users", column: "author_id"
   add_foreign_key "reviews", "recipes"
   add_foreign_key "reviews", "users"
   add_foreign_key "sections", "recipes"

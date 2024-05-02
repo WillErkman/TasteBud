@@ -1,6 +1,6 @@
 class Nutrition < ApplicationRecord
   # Relations
-  belongs_to :recipe
+  belongs_to :recipe, inverse_of: :nutrition
 
   # Validations
 

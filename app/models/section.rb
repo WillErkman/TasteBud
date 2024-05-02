@@ -1,7 +1,23 @@
 class Section < ApplicationRecord
   # Relations
-  belongs_to :recipe
-  has_many :ingredient_lists
+  belongs_to :recipe, inverse_of: :sections
+  has_one :procedure, inverse_of: :section
+  has_many :ingredient_lists, inverse_of: :section
   has_many :ingredients, through: :ingredient_lists
-  has_many :procedures
+
+  accepts_nested_attributes_for :ingredient_lists, allow_destroy: true
+  accepts_nested_attributes_for :procedure, allow_destroy: true
+
+  # Validations
+
+  # Methods
+
+  private
+    # def reject_procedure?(ingredient)
+    #
+    # end
+    #
+    # def reject_ingredient_list?(ingredient_list)
+    #
+    # end
 end
