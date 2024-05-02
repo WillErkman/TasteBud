@@ -9,6 +9,8 @@ class Section < ApplicationRecord
   accepts_nested_attributes_for :procedure, allow_destroy: true
 
   # Validations
+  validates :title, :description, presence: true
+  validates :title, uniqueness: { scope: :recipe_id }
 
   # Methods
 

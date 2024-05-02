@@ -46,16 +46,10 @@ def user_params # Returns a populated User params hash
 	  password: Faker::Internet.password }
 end
 
-def tags_params # Returns array of populated Tag params hashes
-	TAGS_COUNT.times.map do
-		{ name: Faker::Food.ethnic_category }
-	end
-end
-
 def review_params(user)
 	# Returns array of populated Review params hashes
 	{ user: user,
-	  rating: Faker::Number.between(from: 0, to: 5),
+	  rating: Faker::Number.between(from: 1, to: 5),
 	  comment: Faker::Lorem.paragraphs(number: 1) }
 end
 
@@ -67,15 +61,22 @@ def recipe_params # Returns a populated Recipe params hash
 	  description: Faker::Food.description,
 	  yield: Faker::Food.measurement,
 	  sections_attributes: sections_params,
-	  nutrition_attributes: nutrition_params,
-	  tags_attributes: tags_params }
+	  nutrition_attributes: nutrition_params }
+end
+
+def get_tags # Returns array of populated Tag params hashes
+	Faker::Food.unique.clear
+	TAGS_COUNT.times.map do
+		Tag.find_or_create_by(name: Faker::Food.unique.ethnic_category)
+	end
 end
 
 # Create Users and Recipes for those users, along with all resources inside Recipe
 USERS_COUNT.times do
 	u = User.create!(user_params)
 	RECIPES_COUNT.times do
-		u.recipes.create!(recipe_params)
+		r = u.recipes.create!(recipe_params)
+		r.tags << get_tags
 	end
 end
 

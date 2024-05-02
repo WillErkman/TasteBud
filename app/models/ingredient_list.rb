@@ -5,6 +5,8 @@ class IngredientList < ApplicationRecord
 	has_one :recipe, through: :section, inverse_of: :ingredient_lists
 
 	# Validations
+	validates :quantity, length: { in: 2..50 }
+	validates :ingredient_id, uniqueness: { scope: :section_id }
 
 	# Methods
 
