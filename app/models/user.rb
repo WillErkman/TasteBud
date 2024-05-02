@@ -9,7 +9,8 @@ class User < ApplicationRecord
   has_many :reviews
 
   # Validations
-  validates :username, presence: true, uniqueness: true, length: { maximum: 20 }
+  validates :username, presence: true, uniqueness: true, length: { in: 4..20 }
+  validates :email, presence: true, uniqueness: true
 
   # Methods
 end
