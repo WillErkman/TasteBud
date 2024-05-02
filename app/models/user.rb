@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   # Relations
   has_many :recipes, :inverse_of => :author
+  has_many :reviews, :through => :recipes
   has_many :reviews
 
   # Validations
