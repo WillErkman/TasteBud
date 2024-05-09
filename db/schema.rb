@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_02_010845) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_04_014401) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -48,44 +48,46 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_010845) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "ingredient_lists", force: :cascade do |t|
-    t.integer "ingredient_id"
-    t.integer "section_id"
-    t.string "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ingredient_id"], name: "index_ingredient_lists_on_ingredient_id"
-    t.index ["section_id"], name: "index_ingredient_lists_on_section_id"
-  end
-
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "nutritions", force: :cascade do |t|
-    t.integer "recipe_id", null: false
-    t.integer "calories"
-    t.integer "protein"
-    t.integer "carbs"
-    t.integer "sugar"
-    t.integer "fiber"
-    t.integer "fat"
-    t.integer "saturated_fat"
-    t.integer "unsaturated_fat"
-    t.integer "cholesterol"
+  create_table "nutrients", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_nutritions_on_recipe_id"
   end
 
-  create_table "procedures", force: :cascade do |t|
-    t.integer "section_id", null: false
-    t.text "content"
+  create_table "recipe_ingredients", force: :cascade do |t|
+    t.integer "ingredient_id"
+    t.integer "section_id"
+    t.string "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["section_id"], name: "index_procedures_on_section_id"
+    t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
+    t.index ["section_id"], name: "index_recipe_ingredients_on_section_id"
+  end
+
+  create_table "recipe_nutrients", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "nutrient_id", null: false
+    t.integer "quantity"
+    t.integer "unit", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nutrient_id"], name: "index_recipe_nutrients_on_nutrient_id"
+    t.index ["recipe_id"], name: "index_recipe_nutrients_on_recipe_id"
+  end
+
+  create_table "recipe_tags", force: :cascade do |t|
+    t.integer "tag_id", null: false
+    t.integer "recipe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipe_tags_on_recipe_id"
+    t.index ["tag_id"], name: "index_recipe_tags_on_tag_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -128,6 +130,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_010845) do
     t.index ["recipe_id"], name: "index_sections_on_recipe_id"
   end
 
+  create_table "steps", force: :cascade do |t|
+    t.integer "section_id", null: false
+    t.integer "position"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_steps_on_section_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -151,12 +162,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_02_010845) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "ingredient_lists", "ingredients"
-  add_foreign_key "ingredient_lists", "sections"
-  add_foreign_key "nutritions", "recipes"
-  add_foreign_key "procedures", "sections"
+  add_foreign_key "recipe_ingredients", "ingredients"
+  add_foreign_key "recipe_ingredients", "sections"
+  add_foreign_key "recipe_nutrients", "nutrients"
+  add_foreign_key "recipe_nutrients", "recipes"
+  add_foreign_key "recipe_tags", "recipes"
+  add_foreign_key "recipe_tags", "tags"
   add_foreign_key "recipes", "users", column: "author_id"
   add_foreign_key "reviews", "recipes"
   add_foreign_key "reviews", "users"
   add_foreign_key "sections", "recipes"
+  add_foreign_key "steps", "sections"
 end

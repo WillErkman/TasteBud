@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ProcedureTest < ActiveSupport::TestCase
+class RecipeNutrientTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -2,13 +2,13 @@
 USERS_COUNT = 10 # Number of Users
 RECIPES_COUNT = 5 # Number of Recipes per User
 SECTIONS_COUNT = 1 # Number of Sections/Procedures/IngredientLists per Recipe
-INGREDIENT_COUNT = 8 # Number of Ingredients per Recipe/Section/IngredientList
+INGREDIENT_COUNT = 8 # Number of Ingredients per Recipe/Section/RecipeIngredient
 TAGS_COUNT = 3 # Number of Tags per Recipe
 REVIEWS_COUNT = 4 # Number of Reviews per Recipe
 ADMIN_PARAMS = { username: "Admin", email: "admin@admin.com", password: "admin1", admin: true } # Administrator info
 
 #  Parameter creation methods
-def ingredient_lists_params # Returns array of populated IngredientList params hashes
+def ingredient_lists_params # Returns array of populated RecipeIngredient params hashes
 	INGREDIENT_COUNT.times.map do |i|
 		{ quantity: Faker::Food.measurement,
 		  ingredient: Ingredient.find_or_create_by(name: Faker::Food.ingredient) }

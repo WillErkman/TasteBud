@@ -2,17 +2,20 @@
 class Recipe < ApplicationRecord
 	# Relations
 	belongs_to :author, class_name: 'User', foreign_key: 'author_id'
-	has_one :nutrition, dependent: :destroy
+	has_many :recipe_nutrients, inverse_of: :recipe, dependent: :destroy
 	has_many :sections, inverse_of: :recipe, dependent: :destroy
-	has_many :ingredient_lists, through: :sections, inverse_of: :recipe, dependent: :destroy
-	has_many :ingredients, through: :ingredient_lists, inverse_of: :recipes
-	has_many :procedures, through: :sections, inverse_of: :recipe, dependent: :destroy
+	has_many :recipe_ingredients, through: :sections, inverse_of: :recipe, dependent: :destroy
+	has_many :ingredients, through: :recipe_ingredients, inverse_of: :recipes
+	has_many :steps, through: :sections, inverse_of: :recipe, dependent: :destroy
 	has_many :reviews, inverse_of: :recipe
-	has_and_belongs_to_many :tags, inverse_of: :recipes
+	has_many :recipe_tags, inverse_of: :recipe, dependent: :destroy
+	has_many :tags, through: :recipe_tags, inverse_of: :recipes
 
-	# Allow Section to be created from Recipe
+	# Normalize data
+	normalizes :title, :description, with: -> attribute { attribute.strip }
+
 	accepts_nested_attributes_for :sections, allow_destroy: true
-	accepts_nested_attributes_for :nutrition, allow_destroy: true
+	accepts_nested_attributes_for :recipe_nutrients, allow_destroy: true
 
 	# Validations
 	validates :title, presence: true, length: { in: 3..100 }
@@ -21,8 +24,9 @@ class Recipe < ApplicationRecord
 	validates :yield, length: { maximum: 500 }, allow_blank: true
 
 	# Methods
-	scope :find_by_tags, ->(tags) { where(tags: tags) }
-	def tag_names
-		tags.pluck(:name)
-	end
+	scope :find_by_tag, -> (tags) { joins(:tags).where(tags: tags) }
+	scope :find_by_tag_id, -> (tag_ids) { joins(:tags).where(tags: { id: tag_ids }) }
+	scope :find_by_tag_name, -> (tag_names) { joins(:tags).where(tags: { name: tag_names }) }
 end
+
+
