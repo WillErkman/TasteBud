@@ -5,39 +5,42 @@ SECTIONS_COUNT = 1 # Number of Sections/Procedures/IngredientLists per Recipe
 INGREDIENT_COUNT = 8 # Number of Ingredients per Recipe/Section/RecipeIngredient
 TAGS_COUNT = 3 # Number of Tags per Recipe
 REVIEWS_COUNT = 4 # Number of Reviews per Recipe
+NUTRIENTS_COUNT = 5 # Number of RecipeNutrients per Recipe
+STEPS_COUNT = 3 # Number of Steps per Section
 ADMIN_PARAMS = { username: "Admin", email: "admin@admin.com", password: "admin1", admin: true } # Administrator info
 
 #  Parameter creation methods
-def ingredient_lists_params # Returns array of populated RecipeIngredient params hashes
-	INGREDIENT_COUNT.times.map do |i|
+def recipe_ingredients_params # Returns array of populated RecipeIngredient params hashes
+	Faker::Food.unique.clear
+	INGREDIENT_COUNT.times.map do
 		{ quantity: Faker::Food.measurement,
-		  ingredient: Ingredient.find_or_create_by(name: Faker::Food.ingredient) }
+		  ingredient_attributes: { name: Faker::Food.unique.ingredient } }
 	end
 end
 
-def procedure_params # Returns a populated Procedure params hash
-	{ content: Faker::Lorem.paragraphs(number: 4) }
+def steps_params # Returns a populated Procedure params hash
+	STEPS_COUNT.times.map do |i|
+		{ position: i + 1,
+		  content: Faker::Lorem.paragraphs(number: 1) }
+	end
 end
 
 def sections_params # Returns array of populated Section params hashes
 	SECTIONS_COUNT.times.map do |i|
 		{ title: Faker::Food.dish,
 		  description: Faker::Food.description,
-		  procedure_attributes: procedure_params,
-		  ingredient_lists_attributes: ingredient_lists_params }
+		  steps_attributes: steps_params,
+		  recipe_ingredients_attributes: recipe_ingredients_params }
 	end
 end
 
-def nutrition_params # Returns a populated Nutrition params hash
-	{ calories: "#{Faker::Number.decimal(l_digits: 2)}Kcal",
-	  protein: "#{Faker::Number.decimal(l_digits: 2)}g",
-	  carbs: "#{Faker::Number.decimal(l_digits: 2)}g",
-	  sugar: "#{Faker::Number.decimal(l_digits: 2)}g",
-	  fiber: "#{Faker::Number.decimal(l_digits: 2)}g",
-	  fat: "#{Faker::Number.decimal(l_digits: 2)}g",
-	  saturated_fat: "#{Faker::Number.decimal(l_digits: 2)}g",
-	  unsaturated_fat: "#{Faker::Number.decimal(l_digits: 2)}g",
-	  cholesterol: "#{Faker::Number.decimal(l_digits: 2)}g" }
+def recipe_nutrients_params
+	Faker::Food.unique.clear
+	NUTRIENTS_COUNT.times.map do
+		{ quantity: Faker::Number.between(from: 1, to: 999),
+		  unit: Faker::Number.between(from: 0, to: 2),
+		  nutrient_attributes: { name: Faker::Food.unique.dish } }
+	end
 end
 
 def user_params # Returns a populated User params hash
@@ -53,6 +56,13 @@ def review_params(user)
 	  comment: Faker::Lorem.paragraphs(number: 1) }
 end
 
+def tags_params # Returns array of populated Tag params hashes
+	Faker::Food.unique.clear
+	TAGS_COUNT.times.map do
+		{name: Faker::Food.unique.ethnic_category}
+	end
+end
+
 def recipe_params # Returns a populated Recipe params hash
 	{ title: Faker::Food.dish,
 	  cook_time: "#{Faker::Number.between(from: 0, to: 5)}H#{Faker::Number.between(from: 5, to: 55)}M",
@@ -61,14 +71,8 @@ def recipe_params # Returns a populated Recipe params hash
 	  description: Faker::Food.description,
 	  yield: Faker::Food.measurement,
 	  sections_attributes: sections_params,
-	  nutrition_attributes: nutrition_params }
-end
-
-def get_tags # Returns array of populated Tag params hashes
-	Faker::Food.unique.clear
-	TAGS_COUNT.times.map do
-		Tag.find_or_create_by(name: Faker::Food.unique.ethnic_category)
-	end
+	  recipe_nutrients_attributes: recipe_nutrients_params,
+	  tags_attributes: tags_params }
 end
 
 # Create Users and Recipes for those users, along with all resources inside Recipe
@@ -76,7 +80,6 @@ USERS_COUNT.times do
 	u = User.create!(user_params)
 	RECIPES_COUNT.times do
 		r = u.recipes.create!(recipe_params)
-		r.tags << get_tags
 	end
 end
 
@@ -94,6 +97,8 @@ end
 
 # Create Admin
 User.create!(ADMIN_PARAMS)
+
+
 
 
 
