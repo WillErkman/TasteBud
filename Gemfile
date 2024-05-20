@@ -71,3 +71,5 @@ gem "cancancan", "~> 3.5"
 gem "devise", "~> 4.9"
 
 gem "faker", "~> 3.3"
+
+gem "cocoon", "~> 1.2"

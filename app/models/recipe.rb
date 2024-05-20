@@ -3,6 +3,7 @@ class Recipe < ApplicationRecord
 	# Relations
 	belongs_to :author, class_name: 'User', foreign_key: 'author_id'
 	has_many :recipe_nutrients, inverse_of: :recipe, dependent: :destroy
+	has_many :nutrients, through: :recipe_nutrients
 	has_many :sections, inverse_of: :recipe, dependent: :destroy
 	has_many :recipe_ingredients, through: :sections, inverse_of: :recipe, dependent: :destroy
 	has_many :ingredients, through: :recipe_ingredients, inverse_of: :recipes
