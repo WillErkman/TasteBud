@@ -2,12 +2,11 @@
 
 <h1>Recipes</h1>
 
-<div id="recipes">
+<p style="color: green"><%= notice %></p>
+
+<div class="container-fluid d-flex flex-wrap">
   <% @recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
+    <%= render partial: 'layouts/recipe_card', locals: { recipe: recipe } %>
   <% end %>
 </div>
 

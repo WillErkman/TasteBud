@@ -2,12 +2,11 @@
 
 <h1>Ingredients</h1>
 
-<div id="ingredients">
-  <% @ingredients.each do |ingredient| %>
-    <%= ingredient.name %>
-    <p>
-      <%= link_to "Show this ingredient", ingredient %>
-    </p>
-  <% end %>
+<div id="ingredients" class="container-fluid d-flex flex-row flex-wrap">
+	<% @ingredients.each do |ingredient| %>
+		<%= render partial: 'layouts/item_card', locals: { item: ingredient, name: ingredient.name.capitalize } %>
+	<% end %>
 </div>
+
+<%= link_to 'Back to Ingredients', ingredients_path, class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>
 

@@ -4,9 +4,7 @@
 			<h3 class="card-title"><%= recipe.title %></h3>
 			<h5 class="card-subtitle text-secondary"><%= recipe.tag_names.join(' | ') %></h5>
 			<p class="card-text my-3"><%= recipe.description %></p>
-			<div class="btn btn-outline-primary">
-				<%= link_to 'View Recipe', recipe, class: 'card-link m-auto text-decoration-none' %>
-			</div>
+			<%= link_to 'View Recipe', recipe, class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>
 		</div>
 	</div>
 </div>

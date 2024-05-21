@@ -8,14 +8,22 @@ Rails.application.routes.draw do
 		sign_out: 'logout',
 		sign_up: 'register'
 	}
+	resources :users
 
 	# Recipes and Reviews for a Recipe
 	resources :recipes, shallow: true do
 		resources :reviews
 	end
 
-	resources :tags, only: [:index, :show]
-	resources :ingredients, only: [:index, :show]
+	# Tags
+	resources :tags, only: [:index, :show] do
+		resources :recipes, only: [:index]
+	end
+
+	# Ingredients
+	resources :ingredients, only: [:index, :show] do
+		resources :recipes, only: [:index]
+	end
 
 	# Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
 	# Can be used by load balancers and uptime monitors to verify that the app is live.

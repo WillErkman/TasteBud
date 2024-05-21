@@ -6,9 +6,9 @@ class RecipeNutrient < ApplicationRecord
 
 	# Unit enum
 	enum unit: {
-		gram: 0,
-		milligram: 1,
-		percent_daily_value: 2
+		g: 0,
+		mg: 1,
+		percent: 2
 	}
 
 	# Callbacks

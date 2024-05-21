@@ -2,11 +2,10 @@
 
 <h1>Tags</h1>
 
-<div id="tags">
+<div id="tags" class="container-fluid d-flex flex-row flex-wrap">
   <% @tags.each do |tag| %>
-    <%= tag.name %>
-    <p>
-      <%= link_to "Show this tag", tag %>
-    </p>
+    <%= render partial: 'layouts/item_card', locals: { item: tag, name: tag.name.capitalize } %>
   <% end %>
 </div>
+
+<%= link_to 'Back to Tags', tags_path, class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>
