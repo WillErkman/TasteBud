@@ -32,9 +32,6 @@ gem "jbuilder"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
@@ -66,10 +63,22 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# Cancancan for authorization
 gem "cancancan", "~> 3.5"
 
+# Devise for authentication
 gem "devise", "~> 4.9"
 
+# Faker for seed data
 gem "faker", "~> 3.3"
 
+# Cocoon for nested forms
 gem "cocoon", "~> 1.2"
+
+gem "cssbundling-rails", "~> 1.4"
+
+# jquery
+gem "jquery-rails", "~> 4.6"
+
+# scss/sass support
+gem "sass-rails", "~> 6.0"
