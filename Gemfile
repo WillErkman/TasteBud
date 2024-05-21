@@ -75,6 +75,7 @@ gem "faker", "~> 3.3"
 # Cocoon for nested forms
 gem "cocoon", "~> 1.2"
 
+# css bundling
 gem "cssbundling-rails", "~> 1.4"
 
 # jquery
@@ -82,3 +83,6 @@ gem "jquery-rails", "~> 4.6"
 
 # scss/sass support
 gem "sass-rails", "~> 6.0"
+
+# JavaScript bundling
+gem "jsbundling-rails", "~> 1.3"
