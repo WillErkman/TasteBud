@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 	# Defines the root path route ("/")
-	root "static_pages#home"
+	root "static_pages#home", as: 'home'
 
 	# Devise routes for users
 	devise_for :users, path: '', path_names: {

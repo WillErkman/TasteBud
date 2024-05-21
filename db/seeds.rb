@@ -1,12 +1,12 @@
 #  Resource Sizes and Special Resources
-USERS_COUNT = 10 # Number of Users
-RECIPES_COUNT = 5 # Number of Recipes per User
-SECTIONS_COUNT = 1 # Number of Sections/Procedures/IngredientLists per Recipe
+USERS_COUNT = 100 # Number of Users
+RECIPES_COUNT = 10 # Number of Recipes per User
+SECTIONS_COUNT = 2 # Number of Sections/Procedures/IngredientLists per Recipe
 INGREDIENT_COUNT = 8 # Number of Ingredients per Recipe/Section/RecipeIngredient
 TAGS_COUNT = 3 # Number of Tags per Recipe
-REVIEWS_COUNT = 4 # Number of Reviews per Recipe
-NUTRIENTS_COUNT = 5 # Number of RecipeNutrients per Recipe
-STEPS_COUNT = 3 # Number of Steps per Section
+REVIEWS_COUNT = 9 # Number of Reviews per Recipe
+NUTRIENTS_COUNT = 8 # Number of RecipeNutrients per Recipe
+STEPS_COUNT = 6 # Number of Steps per Section
 ADMIN_PARAMS = { username: "Admin", email: "admin@admin.com", password: "admin1", admin: true } # Administrator info
 
 #  Parameter creation methods

@@ -35,6 +35,10 @@ class Recipe < ApplicationRecord
 		end
 	end
 
+	# Return array of Tag names
+	def tag_names
+		tags.map(&:name)
+	end
 	# Scopes
 	# scope :find_by_tag, -> (tags) { joins(:tags).where(tags: tags) }
 	# scope :find_by_tag_id, -> (tag_ids) { joins(:tags).where(tags: { id: tag_ids }) }

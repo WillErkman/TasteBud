@@ -1,10 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @ingredient %>
-
-<div>
-  <%= link_to "Edit this ingredient", edit_ingredient_path(@ingredient) %> |
-  <%= link_to "Back to ingredients", ingredients_path %>
-
-  <%= button_to "Destroy this ingredient", @ingredient, method: :delete %>
+<div class="container-fluid">
+	<div class="container-fluid d-flex flex-wrap">
+		<% @recipes.each do |recipe| %>
+			<%= render partial: 'layouts/recipe_card', locals: { recipe: recipe } %>
+		<% end %>
+	</div>
+	
+	<%= render partial: 'layouts/link_obutton', locals: { link: ingredients_path, color: 'primary' } %>
 </div>

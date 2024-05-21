@@ -10,10 +10,11 @@
   </head>
   
   <body>
-  <h1>Site Header</h1>
-
-    <%= yield %>
-  
+    <%= render 'layouts/header' %>
+    <main class="p-2">
+      <%= yield %>
+    </main>
+    <%= render 'layouts/footer' %>
   <%= javascript_include_tag "jquery" %>
   </body>
 </html>
