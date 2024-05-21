@@ -1,0 +1,18 @@
+<h3>Nutrition Info</h3>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nutritionInfo" aria-expanded="false" aria-controls="nutritionInfo">Toggle
+	Nutrition Info
+</button>
+
+<table class="table">
+	<tr>
+		<th>Nutrient</th>
+		<th>Quantity</th>
+	</tr>
+	<% nutrients.each do |nutrient| %>
+		<tr>
+			<td><%= nutrient.nutrient.name.capitalize %></td>
+			<td><%= nutrient.quantity %> <%= nutrient.unit %></td>
+		</tr>
+	<% end %>
+</table>
+

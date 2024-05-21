@@ -1,13 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Recipes</h1>
+<h1>All Recipes</h1>
+<%= link_to "Create Recipe", new_recipe_path, class: "btn btn-outline-primary" %>
 
-<p style="color: green"><%= notice %></p>
-
-<div class="container-fluid d-flex flex-wrap">
-  <% @recipes.each do |recipe| %>
-    <%= render partial: 'layouts/recipe_card', locals: { recipe: recipe } %>
-  <% end %>
+<div class="row m-4">
+  <%= render partial: 'card', collection: @recipes, as: :recipe %>
 </div>
 
-<%= link_to "New recipe", new_recipe_path %>
+

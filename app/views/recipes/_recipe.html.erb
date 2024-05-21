@@ -1,50 +1,35 @@
 <div id="<%= dom_id recipe %>">
 	<div class="container">
-		<div class="row">
-			<h1><%= recipe.title %></h1>
-			<h4><%= link_to recipe.author.username, recipe.author, class: "text-light-emphasis text-decoration-none" %></h4>
-			<p><%= recipe.description %></p>
-			
-			<table class="table">
-				<tr>
-					<th>Prep Time</th>
-					<th>Cook Time</th>
-					<th>Total Time</th>
-					<th>Yield</th>
-				</tr>
-				<tr>
-					<td><%= recipe.prep_time %></td>
-					<td><%= recipe.cook_time %></td>
-					<td><%= recipe.total_time %></td>
-					<td><%= recipe.yield %></td>
-				</tr>
-			</table>
-			
+		
+		<div class="row border border-black">
+			<%= render partial: 'header', locals: { recipe: recipe } %>
 		</div>
+		
+		<div class="row border border-black">
+			<div class="col d-flex justify-content-between align-items-center">
+				<%= render partial: 'info', locals: { recipe: recipe } %>
+			</div>
+		</div>
+		
 		<div class="row">
-			<div class="col-3">
-				<h3>Tags</h3>
-				<ul>
-					<% recipe.tags.each do |tag| %>
-						<li><%= link_to tag.name, tag %></li>
-					<% end %>
-				</ul>
+			<div class="col-9">
+				<% recipe.sections.each do |section| %>
+					<div class="container border border-black m-2">
+						<%= render partial: 'section', locals: { section: section } %>
+					</div>
+				<% end %>
 			</div>
-			<div class="col-3">
-				<h3>Ingredients</h3>
-				<ul>
-					<% recipe.recipe_ingredients.each do |ingredient| %>
-						<li><%= ingredient.quantity %> <%= link_to ingredient.ingredient.name, ingredient.ingredient %></li>
-					<% end %>
-				</ul>
-			</div>
-			<div class="col-3">
-				<h3>Nutrients</h3>
-				<ul>
-					<% recipe.recipe_nutrients.each do |nutrient| %>
-						<li><%= nutrient.nutrient.name %> <%= nutrient.quantity %> <%= nutrient.unit %></li>
-					<% end %>
-				</ul>
+			
+			<div class="col-3 border border-black">
+				<div class="row border border-black">
+					<div class="col-3 w-auto">
+						<%= render partial: 'ingredients', locals: { ingredients: recipe.recipe_ingredients } %>
+					</div>
+				</div>
+				
+				<div class="row border border-black w-auto">
+					<%= render partial: 'nutrition', locals: { nutrients: recipe.recipe_nutrients } %>
+				</div>
 			</div>
 		</div>
 	</div>

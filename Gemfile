@@ -86,3 +86,5 @@ gem "sass-rails", "~> 6.0"
 
 # JavaScript bundling
 gem "jsbundling-rails", "~> 1.3"
+
+gem "bootstrap", "~> 5.3"

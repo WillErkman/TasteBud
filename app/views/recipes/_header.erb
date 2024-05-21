@@ -1,0 +1,16 @@
+<div class="container-fluid">
+	
+	<div class="container d-flex flex-row align-items-baseline justify-content-between">
+		<h1 class="me-4"><%= recipe.title %></h1>
+		<h4 class=""><%= link_to recipe.author.username, recipe.author, class: "text-light-emphasis text-decoration-none" %></h4>
+	</div>
+	<div class="container d-flex flex-row">
+		<% recipe.tags.each do |tag| %>
+			<h5 class="me-3"><%= link_to tag.name.capitalize, tag, class: "text-decoration-none" %></h5>
+		<% end %>
+	</div>
+	<div class="container">
+		<p class=""><%= recipe.description %></p>
+	</div>
+</div>
+

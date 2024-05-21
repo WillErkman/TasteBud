@@ -1,11 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Tags</h1>
+<h1>All Tags</h1>
 
 <div id="tags" class="container-fluid d-flex flex-row flex-wrap">
-  <% @tags.each do |tag| %>
-    <%= render partial: 'layouts/item_card', locals: { item: tag, name: tag.name.capitalize } %>
-  <% end %>
+	<%= render @tags || "There are no tags yet" %>
 </div>
 
 <%= link_to 'Back to Tags', tags_path, class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>

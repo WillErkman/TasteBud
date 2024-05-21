@@ -1,0 +1,13 @@
+<h3>Ingredients</h3>
+<table class="table text-center">
+	<tr>
+		<th>Quantity</th>
+		<th>Ingredient</th>
+	</tr>
+	<% ingredients.each do |ingredient| %>
+		<tr>
+			<td><%= ingredient.quantity %></td>
+			<td><%= link_to ingredient.ingredient.name, ingredient.ingredient %></td>
+		</tr>
+	<% end %>
+</table>

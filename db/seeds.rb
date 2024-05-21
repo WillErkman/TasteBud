@@ -21,7 +21,8 @@ end
 def steps_params # Returns a populated Procedure params hash
 	STEPS_COUNT.times.map do |i|
 		{ position: i + 1,
-		  content: Faker::Lorem.paragraphs(number: 1) }
+		  title: Faker::Lorem.sentence,
+		  content: Faker::Lorem.paragraph(sentence_count: 8, supplemental: true, random_sentences_to_add: 3) }
 	end
 end
 

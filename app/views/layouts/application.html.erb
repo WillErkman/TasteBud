@@ -11,10 +11,11 @@
   
   <body>
     <%= render 'layouts/header' %>
-    <main class="p-2">
-      <%= yield %>
+    <main class="d-flex justify-content-center align-items-center">
+      <div class="container p-3">
+        <%= yield %>
+      </div>
     </main>
     <%= render 'layouts/footer' %>
-  <%= javascript_include_tag "jquery" %>
   </body>
 </html>

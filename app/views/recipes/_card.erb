@@ -1,8 +1,8 @@
-<div class="col-3 m-2">
+<div class="col-4 p-3">
 	<div class="card">
 		<div class="card-body">
 			<h3 class="card-title"><%= recipe.title %></h3>
-			<h5 class="card-subtitle text-secondary"><%= recipe.tag_names.join(' | ') %></h5>
+			<h5 class="card-subtitle text-secondary"><%= recipe.tag_names.join(' | ').titleize %></h5>
 			<p class="card-text my-3"><%= recipe.description %></p>
 			<%= link_to 'View Recipe', recipe, class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>
 		</div>
