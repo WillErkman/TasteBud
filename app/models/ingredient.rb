@@ -8,7 +8,7 @@ class Ingredient < ApplicationRecord
 	validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { in: 2..100 }
 
 	# Callbacks
-	after_create :generate_image, :generate_description
+
 
 	# Normalize attributes
 	normalizes :name, with: -> name { name.downcase.strip }
@@ -18,21 +18,19 @@ class Ingredient < ApplicationRecord
 	def generate_image
 		response = OpenAI::Client.new.images.generate(
 			parameters: {
-				prompt: name,
+				prompt: self.name,
 				size: "256x256" })
-		#tempfile = Down.download(response.dig("data", 0, "url"))
-		image.attach(io: URI.parse(response.dig("data", 0, "url")).open, filename: "#{name}.png")
+		self.image.attach(io: URI.parse(response.dig("data", 0, "url")).open, filename: "#{self.name.parameterize(separator: "_")}_ing.png")
 	end
 
 	def generate_description
 		response = OpenAI::Client.new.chat(
 			parameters: {
 				model: "gpt-4o", # Required.
-				messages: [{ role: "user", content: "Give a description of #{name} and list some common culinary uses for #{name}" }], # Required.
+				messages: [{ role: "user", content: "Give a description of #{self.name} and list some common culinary uses for #{self.name}" }], # Required.
 				temperature: 0.7,
 				max_tokens: 400
 			})
 		self.description = response.dig("choices", 0, "message", "content")
 	end
-
 end
