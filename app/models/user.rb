@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   # Relations
+  has_one_attached :avatar
   has_many :recipes, :inverse_of => :author
   has_many :reviews, :through => :recipes
   has_many :reviews
@@ -13,4 +14,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   # Methods
+  def is_admin?
+    self.admin
+  end
 end

@@ -3,6 +3,6 @@ class Step < ApplicationRecord
   belongs_to :section
 
   # Normalize content
-  normalizes :content, with: -> content { content.strip }
+  normalizes :content, :title, with: -> content { content.strip }
 
 end
