@@ -2,7 +2,7 @@
 	<div class="card">
 		<div class="card-body">
 			<h2 class="card-title"><%= tag.name.titleize %></h2>
-			<%= link_to "Recipes", tag, class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>
+			<%= link_to "Recipes", tag_recipes_path( tag ), class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>
 		</div>
 	</div>
 </div>

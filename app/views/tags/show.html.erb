@@ -1,9 +1,0 @@
-<p style="color: green"><%= notice %></p>
-
-<div class="container-fluid d-flex flex-wrap">
-	<% @recipes.each do |recipe| %>
-		<%= render partial: 'layouts/recipe_card', locals: { recipe: recipe } %>
-	<% end %>
-</div>
-
-<%= link_to 'Back to Tags', tags_path, class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>

@@ -10,7 +10,9 @@ class Tag < ApplicationRecord
 	normalizes :name, with: -> name { name.downcase.strip }
 
 	# Callbacks
-	after_create GenerateImageJob.perform_later self
+	after_create do
+	 GenerateImageJob.set(wait: (1 + self.id).hour).perform_later(self)
+	end
 
 	# Methods
 	def generate_image

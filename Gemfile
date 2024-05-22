@@ -92,3 +92,6 @@ gem "bootstrap", "~> 5.3"
 gem "ruby-openai", "~> 7.0"
 
 gem "down", "~> 5.4"
+
+
+gem "formtastic", "~> 5.0"

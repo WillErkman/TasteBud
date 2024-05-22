@@ -1,25 +1,25 @@
 class RecipesController < ApplicationController
 	before_action :set_recipe, only: %i[ show edit update destroy ]
 
-	# GET /recipes or /recipes.json
+	# GET /ingredients or /ingredients.json
 	def index
 		@recipes = Recipe.all
 	end
 
-	# GET /recipes/1 or /recipes/1.json
+	# GET /ingredients/1 or /ingredients/1.json
 	def show
 	end
 
-	# GET /recipes/new
+	# GET /ingredients/new
 	def new
 		@recipe = Recipe.new
 	end
 
-	# GET /recipes/1/edit
+	# GET /ingredients/1/edit
 	def edit
 	end
 
-	# POST /recipes or /recipes.json
+	# POST /ingredients or /ingredients.json
 	def create
 		@recipe = Recipe.new(recipe_params)
 
@@ -34,7 +34,7 @@ class RecipesController < ApplicationController
 		end
 	end
 
-	# PATCH/PUT /recipes/1 or /recipes/1.json
+	# PATCH/PUT /ingredients/1 or /ingredients/1.json
 	def update
 		respond_to do |format|
 			if @recipe.update(recipe_params)
@@ -47,7 +47,7 @@ class RecipesController < ApplicationController
 		end
 	end
 
-	# DELETE /recipes/1 or /recipes/1.json
+	# DELETE /ingredients/1 or /ingredients/1.json
 	def destroy
 		@recipe.destroy!
 

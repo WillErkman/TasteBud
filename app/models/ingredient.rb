@@ -9,8 +9,7 @@ class Ingredient < ApplicationRecord
 
 	# Callbacks
 
-
-	# Normalize attributes
+	# Normalization
 	normalizes :name, with: -> name { name.downcase.strip }
 	normalizes :description, with: -> description { description.strip if description }
 

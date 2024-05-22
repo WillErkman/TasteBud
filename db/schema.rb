@@ -91,7 +91,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_232221) do
     t.index ["tag_id"], name: "index_recipe_tags_on_tag_id"
   end
 
-  create_table "recipes", force: :cascade do |t|
+  create_table "ingredients", force: :cascade do |t|
     t.string "title"
     t.string "prep_time"
     t.string "cook_time"
@@ -167,12 +167,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_232221) do
   add_foreign_key "recipe_ingredients", "ingredients"
   add_foreign_key "recipe_ingredients", "sections"
   add_foreign_key "recipe_nutrients", "nutrients"
-  add_foreign_key "recipe_nutrients", "recipes"
-  add_foreign_key "recipe_tags", "recipes"
+  add_foreign_key "recipe_nutrients", "ingredients"
+  add_foreign_key "recipe_tags", "ingredients"
   add_foreign_key "recipe_tags", "tags"
-  add_foreign_key "recipes", "users", column: "author_id"
-  add_foreign_key "reviews", "recipes"
+  add_foreign_key "ingredients", "users", column: "author_id"
+  add_foreign_key "reviews", "ingredients"
   add_foreign_key "reviews", "users"
-  add_foreign_key "sections", "recipes"
+  add_foreign_key "sections", "ingredients"
   add_foreign_key "steps", "sections"
 end

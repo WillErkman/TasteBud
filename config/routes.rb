@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 		sign_out: 'logout',
 		sign_up: 'register'
 	}
-	resources :users
+	resources :users, only: [:show, :edit, :update]
 
 	# Recipes and Reviews for a Recipe
 	resources :recipes, shallow: true do
@@ -16,13 +16,13 @@ Rails.application.routes.draw do
 	end
 
 	# Tags
-	resources :tags, only: [:index, :show] do
-		resources :recipes, only: [:index]
+	resources :tags, only: [:index] do
+		resources :recipes, only: [:index], controller: 'tags/recipes'
 	end
 
 	# Ingredients
 	resources :ingredients, only: [:index, :show] do
-		resources :recipes, only: [:index]
+		resources :recipes, only: [:index], controller: 'ingredients/recipes'
 	end
 
 	# Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

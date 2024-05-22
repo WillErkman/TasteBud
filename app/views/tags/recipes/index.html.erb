@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container-fluid">
+	<div class="container-fluid d-flex flex-wrap">
+		<%= render partial: 'recipes/card', collection: @recipes, as: :recipe %>
+	</div>
+	
+	<%= link_to 'Back to Tags', tags_path, class: 'card-link m-auto text-decoration-none btn btn-outline-primary' %>
+</div>

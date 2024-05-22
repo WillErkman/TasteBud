@@ -9,8 +9,6 @@ NUTRIENTS_COUNT = 8 # Number of RecipeNutrients per Recipe
 STEPS_COUNT = 6 # Number of Steps per Section
 ADMIN_PARAMS = { username: "Admin", email: "admin@admin.com", password: "admin1", admin: true } # Administrator info
 
-
-
 #  Parameter creation methods
 
 def ingredient_params
@@ -21,7 +19,8 @@ end
 def recipe_ingredients_params # Returns array of populated RecipeIngredient params hashes
 	INGREDIENT_COUNT.times.map do
 		{ quantity: Faker::Food.measurement,
-		  ingredient_attributes: ingredient_params }
+		  ingredient_attributes: { name: Faker::Food.ingredient,
+		                           description: Faker::Food.description } }
 	end
 end
 
@@ -83,7 +82,7 @@ def recipe_params # Returns a populated Recipe params hash
 	  tags_attributes: tags_params }
 end
 
-# Create Users and Recipes for those users, along with all resources inside Recipe
+# Create Users and Recipes for those users, along with all tags_recipes inside Recipe
 USERS_COUNT.times do
 	u = User.create!(user_params)
 	RECIPES_COUNT.times do
