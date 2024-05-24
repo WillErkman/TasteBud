@@ -1,36 +1,19 @@
 <div id="<%= dom_id recipe %>">
-	<div class="container">
-		
-		<div class="row border border-black">
-			<%= render partial: 'header', locals: { recipe: recipe } %>
+	
+	<%= render partial: 'header', locals: { recipe: recipe } %>
+	
+	<div class="row">
+		<div class="col">
+			<%= render partial: 'ingredients', locals: { ingredients: recipe.recipe_ingredients } %>
 		</div>
 		
-		<div class="row border border-black">
-			<div class="col d-flex justify-content-between align-items-center">
-				<%= render partial: 'info', locals: { recipe: recipe } %>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-9">
-				<% recipe.sections.each do |section| %>
-					<div class="container border border-black m-2">
-						<%= render partial: 'section', locals: { section: section } %>
-					</div>
-				<% end %>
-			</div>
-			
-			<div class="col-3 border border-black">
-				<div class="row border border-black">
-					<div class="col-3 w-auto">
-						<%= render partial: 'ingredients', locals: { ingredients: recipe.recipe_ingredients } %>
-					</div>
-				</div>
-				
-				<div class="row border border-black w-auto">
-					<%= render partial: 'nutrition', locals: { nutrients: recipe.recipe_nutrients } %>
-				</div>
-			</div>
+		<div class="col">
+			<%= render partial: 'nutrition', locals: { nutrients: recipe.recipe_nutrients } %>
 		</div>
 	</div>
+	
+	<div class="row">
+		<%= render recipe.sections %>
+	</div>
 </div>
+

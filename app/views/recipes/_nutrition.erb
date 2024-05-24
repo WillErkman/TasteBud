@@ -1,18 +1,20 @@
-<h3>Nutrition Info</h3>
-<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nutritionInfo" aria-expanded="false" aria-controls="nutritionInfo">Toggle
-	Nutrition Info
-</button>
-
-<table class="table">
-	<tr>
-		<th>Nutrient</th>
-		<th>Quantity</th>
-	</tr>
-	<% nutrients.each do |nutrient| %>
+<div class="container bg-light p-3 m-3">
+	<h3 class="text-center p-1">Nutrition Info</h3>
+	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nutritionInfo" aria-expanded="false" aria-controls="nutritionInfo">Toggle
+		Nutrition Info
+	</button>
+	
+	<table class="table">
 		<tr>
-			<td><%= nutrient.nutrient.name.capitalize %></td>
-			<td><%= nutrient.quantity %> <%= nutrient.unit %></td>
+			<th>Nutrient</th>
+			<th>Quantity</th>
 		</tr>
-	<% end %>
-</table>
+		<% nutrients.each do |nutrient| %>
+			<tr>
+				<td><%= nutrient.nutrient.name.capitalize %></td>
+				<td><%= nutrient.quantity %> <%= nutrient.unit %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
 

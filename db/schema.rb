@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_232221) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_23_234049) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -63,12 +63,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_232221) do
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer "ingredient_id"
-    t.integer "section_id"
     t.string "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "recipe_id"
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
-    t.index ["section_id"], name: "index_recipe_ingredients_on_section_id"
+    t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
   end
 
   create_table "recipe_nutrients", force: :cascade do |t|
@@ -82,16 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_232221) do
     t.index ["recipe_id"], name: "index_recipe_nutrients_on_recipe_id"
   end
 
-  create_table "recipe_tags", force: :cascade do |t|
-    t.integer "tag_id", null: false
-    t.integer "recipe_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recipe_id"], name: "index_recipe_tags_on_recipe_id"
-    t.index ["tag_id"], name: "index_recipe_tags_on_tag_id"
-  end
-
-  create_table "ingredients", force: :cascade do |t|
+  create_table "recipes", force: :cascade do |t|
     t.string "title"
     t.string "prep_time"
     t.string "cook_time"
@@ -104,11 +95,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_232221) do
     t.index ["author_id"], name: "index_recipes_on_author_id"
   end
 
-  create_table "recipes_tags", id: false, force: :cascade do |t|
+  create_table "recipes_tags", force: :cascade do |t|
     t.integer "tag_id", null: false
     t.integer "recipe_id", null: false
-    t.index ["recipe_id", "tag_id"], name: "index_recipes_tags_on_recipe_id_and_tag_id", unique: true
-    t.index ["tag_id", "recipe_id"], name: "index_recipes_tags_on_tag_id_and_recipe_id", unique: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipes_tags_on_recipe_id"
+    t.index ["tag_id"], name: "index_recipes_tags_on_tag_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -165,14 +158,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_232221) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "recipe_ingredients", "ingredients"
-  add_foreign_key "recipe_ingredients", "sections"
+  add_foreign_key "recipe_ingredients", "recipes"
   add_foreign_key "recipe_nutrients", "nutrients"
-  add_foreign_key "recipe_nutrients", "ingredients"
-  add_foreign_key "recipe_tags", "ingredients"
-  add_foreign_key "recipe_tags", "tags"
-  add_foreign_key "ingredients", "users", column: "author_id"
-  add_foreign_key "reviews", "ingredients"
+  add_foreign_key "recipe_nutrients", "recipes"
+  add_foreign_key "recipes", "users", column: "author_id"
+  add_foreign_key "recipes_tags", "recipes"
+  add_foreign_key "recipes_tags", "tags"
+  add_foreign_key "reviews", "recipes"
   add_foreign_key "reviews", "users"
-  add_foreign_key "sections", "ingredients"
+  add_foreign_key "sections", "recipes"
   add_foreign_key "steps", "sections"
 end

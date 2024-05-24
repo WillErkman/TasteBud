@@ -41,6 +41,15 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
+# JavaScript bundling
+gem "jsbundling-rails", "~> 1.3"
+
+# css bundling
+gem "cssbundling-rails", "~> 1.4"
+
+# scss/sass support
+gem "sass-rails", "~> 6.0"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
@@ -63,35 +72,27 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# Faker for seed data
+gem "faker", "~> 3.3"
+
 # Cancancan for authorization
 gem "cancancan", "~> 3.5"
 
 # Devise for authentication
 gem "devise", "~> 4.9"
 
-# Faker for seed data
-gem "faker", "~> 3.3"
+# Formtastic for building forms
+gem "formtastic", "~> 5.0"
 
 # Cocoon for nested forms
 gem "cocoon", "~> 1.2"
 
-# css bundling
-gem "cssbundling-rails", "~> 1.4"
-
-# jquery
+# jquery for Cocoon
 gem "jquery-rails", "~> 4.6"
 
-# scss/sass support
-gem "sass-rails", "~> 6.0"
-
-# JavaScript bundling
-gem "jsbundling-rails", "~> 1.3"
-
+# Bootstrap for styling
 gem "bootstrap", "~> 5.3"
 
+# OpenAI for generating images/text
 gem "ruby-openai", "~> 7.0"
 
-gem "down", "~> 5.4"
-
-
-gem "formtastic", "~> 5.0"

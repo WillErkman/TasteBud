@@ -1,17 +1,41 @@
-<%= form_with(model: recipe) do |form| %>
-  <% if recipe.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
-
-      <ul>
-        <% recipe.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<%= semantic_form_for @recipe do |f| %>
+	<div id="form-fields" class="row">
+		<div id="recipe-fields" class="col">
+			<h2>Recipe Info</h2>
+			<%= f.inputs do %>
+				<%= f.input :title %>
+				<%= f.input :prep_time %>
+				<%= f.input :cook_time %>
+				<%= f.input :total_time %>
+				<%= f.input :description %>
+				<%= f.input :yield %>
+			<% end %>
+		</div>
+		
+		<div id="nutrition-fields" class="col">
+			<h2>Nutrition Info</h2>
+			<div>
+				<%= f.semantic_fields_for :recipe_nutrient do |nutrient| %>
+					<%= render 'recipe_nutrient_fields', f: nutrient %>
+					<%= link_to_add_association 'Add Nutrient Info', f, :recipe_nutrients %>
+				<% end %>
+			</div>
+		</div>
+		
+		<div id="section-fields" class="col">
+			<h2>Content</h2>
+			<div>
+				<%= f.semantic_fields_for :section do |section| %>
+				<%= render 'section_fields', f: section %>
+					<%= link_to_add_association 'Add Section', f, :sections %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	
+	<div id="form-actions">
+		<%= f.actions do %>
+			<%= f.action :submit, :button_html => { :class => "btn btn-primary", :disable_with => 'Wait...' } %>
+		<% end %>
+	</div>
 <% end %>

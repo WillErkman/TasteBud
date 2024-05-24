@@ -5,7 +5,7 @@ class Recipe < ApplicationRecord
 	has_many :recipe_nutrients, inverse_of: :recipe, dependent: :destroy
 	has_many :nutrients, through: :recipe_nutrients
 	has_many :sections, inverse_of: :recipe, dependent: :destroy
-	has_many :recipe_ingredients, through: :sections, inverse_of: :recipe, dependent: :destroy
+	has_many :recipe_ingredients, inverse_of: :recipe, dependent: :destroy
 	has_many :ingredients, through: :recipe_ingredients, inverse_of: :recipes
 	has_many :steps, through: :sections, inverse_of: :recipe, dependent: :destroy
 	has_many :reviews, inverse_of: :recipe
@@ -20,6 +20,7 @@ class Recipe < ApplicationRecord
 
 	accepts_nested_attributes_for :sections, allow_destroy: true
 	accepts_nested_attributes_for :recipe_nutrients, allow_destroy: true
+	accepts_nested_attributes_for :recipe_ingredients, allow_destroy: true
 	accepts_nested_attributes_for :tags, allow_destroy: true
 
 	# Validations

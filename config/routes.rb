@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 	# Defines the root path route ("/")
 	root "static_pages#home", as: 'home'
 
-	# Devise routes for users
+	# Users
 	devise_for :users, path: '', path_names: {
 		sign_in: 'login',
 		sign_out: 'logout',

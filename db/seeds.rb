@@ -36,8 +36,7 @@ def sections_params # Returns array of populated Section params hashes
 	SECTIONS_COUNT.times.map do |i|
 		{ title: Faker::Food.dish,
 		  description: Faker::Food.description,
-		  steps_attributes: steps_params,
-		  recipe_ingredients_attributes: recipe_ingredients_params }
+		  steps_attributes: steps_params }
 	end
 end
 
@@ -79,7 +78,8 @@ def recipe_params # Returns a populated Recipe params hash
 	  yield: Faker::Food.measurement,
 	  sections_attributes: sections_params,
 	  recipe_nutrients_attributes: recipe_nutrients_params,
-	  tags_attributes: tags_params }
+	  tags_attributes: tags_params,
+	  recipe_ingredients_attributes: recipe_ingredients_params }
 end
 
 # Create Users and Recipes for those users, along with all tags_recipes inside Recipe

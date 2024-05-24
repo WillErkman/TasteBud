@@ -1,13 +1,19 @@
-<header id="header" class="bg-secondary">
-	<nav class="navbar navbar-expand-lg bg-light px-2 py-0">
-		<a class="navbar-brand">TasteBud</a>
+<header id="header" class="container-fluid h-auto bg-light d-flex justify-content-between align-items-center">
+	<nav class="navbar navbar-expand-lg px-2 py-0  align-items-center">
+		<a class="navbar-brand fs-3">TasteBud</a>
 		<div class="collapse navbar-collapse">
-			<ul class="navbar-nav m-0 p-2">
-				<li class="nav-item"><%= link_to 'Home', home_path, class: "nav-link text-dark" %></li>
-				<li class="nav-item"><%= link_to 'Ingredients', ingredients_path, class: "nav-link text-dark" %></li>
-				<li class="nav-item"><%= link_to 'Tags', tags_path, class: "nav-link text-dark" %></li>
-				<li class="nav-item"><%= link_to 'Recipes', recipes_path, class: "nav-link text-dark" %></li>
+			<ul class="navbar-nav m-0 p-1 fs-5">
+				<li class="nav-item px-1"><%= link_to 'Home', home_path, class: "nav-link text-dark" %></li>
+				<li class="nav-item px-1"><%= link_to 'Ingredients', ingredients_path, class: "nav-link text-dark" %></li>
+				<li class="nav-item px-1"><%= link_to 'Tags', tags_path, class: "nav-link text-dark" %></li>
+				<li class="nav-item px-1"><%= link_to 'Recipes', recipes_path, class: "nav-link text-dark" %></li>
 			</ul>
 		</div>
 	</nav>
+	<div class="row m-1 text-nowrap">
+		<div class="col d-flex align-items-center justify-content-center"><%= link_to 'Create', new_recipe_path, class: "text-primary text-decoration-none m-auto" %></div>
+		<div class="col"><%= link_to 'Log in', new_user_session_path, class: "btn btn-outline-secondary m-auto" %></div>
+		<div class="col"><%= link_to 'Sign up', new_user_registration_path, class: "btn btn-primary m-auto" %></div>
+	</div>
+
 </header>

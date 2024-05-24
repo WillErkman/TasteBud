@@ -1,0 +1,13 @@
+<div class="col">
+	<%= f.input :title %>
+	<%= f.input :content %>
+	
+	<h2>Ingredients</h2>
+	<div>
+		<%= f.semantic_fields_for :recipe_ingredients do |ingredient| %>
+			<%= render 'recipe_ingredient_fields', f: ingredient %>
+		<% end %>
+	</div>
+	
+	<%= link_to_remove_association "Remove Section", f %>
+</div>
