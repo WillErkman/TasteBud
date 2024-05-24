@@ -14,10 +14,5 @@ class Section < ApplicationRecord
 	validates :title, uniqueness: { scope: :recipe_id }
 
 	# Methods
-	def steps_attributes=(steps_attributes)
-		steps_attributes.values.each do |step_attributes|
-			step = steps.find_or_create_by step_attributes
-			self.steps << step
-		end
-	end
+	
 end
