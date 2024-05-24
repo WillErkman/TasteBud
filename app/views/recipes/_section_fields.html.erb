@@ -1,13 +1,24 @@
-<div class="col">
-	<%= f.input :title %>
-	<%= f.input :content %>
-	
-	<h2>Ingredients</h2>
-	<div>
-		<%= f.semantic_fields_for :recipe_ingredients do |ingredient| %>
-			<%= render 'recipe_ingredient_fields', f: ingredient %>
-		<% end %>
+<div id="sections-fields" class="col m-2 p-2">
+	<div data-model="section" data-template="true">
+		<div class="container border-bottom border-black">
+			<div>
+				<%= f.label :title, "Title" %>
+				<%= f.text_field :title %>
+			</div>
+			<div>
+				<%= f.label :description, "Description" %>
+				<%= f.text_area :description %>
+			</div>
+		</div>
+		
+		<!-- Step Fields -->
+		<fieldset id="steps-fields">
+			<%= f.fields :steps do |sf| %>
+				<%= render 'step_fields', f: sf %>
+			<% end %>
+			<%= link_to_add_association 'Add Step', f, :steps %>
+		</fieldset>
+		
+		<%= link_to_remove_association 'Remove Section', f %>
 	</div>
-	
-	<%= link_to_remove_association "Remove Section", f %>
 </div>

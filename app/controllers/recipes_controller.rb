@@ -1,72 +1,80 @@
 class RecipesController < ApplicationController
 	before_action :set_recipe, only: %i[ show edit update destroy ]
 
-	# GET /ingredients or /ingredients.json
 	def index
 		@recipes = Recipe.all
 	end
 
-	# GET /ingredients/1 or /ingredients/1.json
 	def show
+		if @recipe.nil?
+			@recipes = Recipe.all
+			flash.now[:alert] = "Recipe could not be found"
+			render :index
+		end
 	end
 
-	# GET /ingredients/new
 	def new
 		@recipe = Recipe.new
+		@sections = @recipe.sections
+		@recipe_ingredients = @recipe.recipe_ingredients
+		@recipe_nutrients = @recipe.recipe_nutrients
+		@tags = @recipe.tags
+		init_models
 	end
 
-	# GET /ingredients/1/edit
 	def edit
 	end
 
-	# POST /ingredients or /ingredients.json
 	def create
 		@recipe = Recipe.new(recipe_params)
-
-		respond_to do |format|
-			if @recipe.save
-				format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
-				format.json { render :show, status: :created, location: @recipe }
-			else
-				format.html { render :new, status: :unprocessable_entity }
-				format.json { render json: @recipe.errors, status: :unprocessable_entity }
-			end
+		if @recipe.save
+			redirect_to recipes_path, notice: "Success!"
+		else
+			flash.now[:alert] = @recipe.errors.full_messages
+			render :new
 		end
 	end
 
-	# PATCH/PUT /ingredients/1 or /ingredients/1.json
 	def update
-		respond_to do |format|
-			if @recipe.update(recipe_params)
-				format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully updated." }
-				format.json { render :show, status: :ok, location: @recipe }
-			else
-				format.html { render :edit, status: :unprocessable_entity }
-				format.json { render json: @recipe.errors, status: :unprocessable_entity }
-			end
+		if @recipe.update(recipe_params)
+			redirect_to recipes_path, notice: "Success!"
+		else
+			flash.now[:alert] = @recipe.errors.full_messages
+			render :edit
 		end
 	end
 
-	# DELETE /ingredients/1 or /ingredients/1.json
 	def destroy
 		@recipe.destroy!
-
-		respond_to do |format|
-			format.html { redirect_to recipes_url, notice: "Recipe was successfully destroyed." }
-			format.json { head :no_content }
-		end
+		redirect_to recipes_url, notice: "Recipe was successfully destroyed!"
 	end
 
 	private
 
-	# Use callbacks to share common setup or constraints between actions.
-	def set_recipe
-		@recipe = Recipe.find(params[:id])
-	end
+		def init_models
+			section = @sections.build
+			3.times do
+				section.steps.build
+			end
+			@recipe_ingredients.build
+			@recipe_nutrients.build
+			@tags.build
+		end
 
-	# Only allow a list of trusted parameters through.
-	def recipe_params
-		params.fetch(:recipe, {}).permit(:title, :prep_time, :cook_time, :total_time, :description,
-		                                 :yield, :user_id)
-	end
+		# Use callbacks to share common setup or constraints between actions.
+		def set_recipe
+			@recipe = Recipe.find(params[:id])
+		end
+
+		# Only allow a list of trusted parameters through.
+		def recipe_params
+			params.require(:recipe).permit(:title, :prep_time, :cook_time, :total_time, :description, :yield,
+			                               sections_attributes: [:title, :description,
+			                                                     steps_attributes: [:title, :content, :position]],
+			                               recipe_nutrients_attributes: [:quantity, :unit,
+			                                                             nutrient_attributes: [:name]],
+			                               recipe_ingredients_attributes: [:quantity, :unit,
+			                                                               ingredient_attributes: [:name]],
+			                               tags_attributes: [:name])
+		end
 end

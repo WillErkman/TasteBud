@@ -1,41 +1,94 @@
-<%= semantic_form_for @recipe do |f| %>
-	<div id="form-fields" class="row">
-		<div id="recipe-fields" class="col">
-			<h2>Recipe Info</h2>
-			<%= f.inputs do %>
-				<%= f.input :title %>
-				<%= f.input :prep_time %>
-				<%= f.input :cook_time %>
-				<%= f.input :total_time %>
-				<%= f.input :description %>
-				<%= f.input :yield %>
-			<% end %>
-		</div>
-		
-		<div id="nutrition-fields" class="col">
-			<h2>Nutrition Info</h2>
-			<div>
-				<%= f.semantic_fields_for :recipe_nutrient do |nutrient| %>
-					<%= render 'recipe_nutrient_fields', f: nutrient %>
-					<%= link_to_add_association 'Add Nutrient Info', f, :recipe_nutrients %>
+<%= form_with model: @recipe do |f| %>
+	<div class="container">
+		<div id="recipe-form" class="row align-items-baseline m-2">
+			<!-- Recipe Fields -->
+			<div class="col-6 border border-black border-1 rounded-2 align-items-baseline p-2">
+				<h2>Recipe Info</h2>
+				<div id="recipe_fields" class="">
+					<div class="row">
+						<div class="col">
+							<div class="d-flex">
+								<%= f.label :title, "Title" %>
+								<%= f.text_field :title, class: "" %>
+							</div>
+							
+							<div class="d-flex">
+								<%= f.label :description, "Description" %>
+								<%= f.text_area :description %>
+							</div>
+						</div>
+						
+						<div class="col">
+							<div class="d-flex">
+								<%= f.label :prep_time, "Prep Time" %>
+								<%= f.text_field :prep_time %>
+							</div>
+							
+							<div class="d-flex">
+								<%= f.label :cook_time, "Cook Time" %>
+								<%= f.text_field :cook_time %>
+							</div>
+							<div></div>
+							
+							<div class="d-flex">
+								<%= f.label :total_time, "Total Time" %>
+								<%= f.text_field :total_time %>
+							</div>
+							
+							<div class="d-flex">
+								<%= f.label :yield, "Yield" %>
+								<%= f.text_field :yield %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- RecipeIngredients and Ingredient Fields -->
+			<div class="col-3 border border-black border-1 rounded-2 p-2">
+				<h2>Ingredients</h2>
+				<%= f.fields_for :recipe_ingredients do |ingredient| %>
+					<%= render 'recipe_ingredient_fields', f: ingredient %>
 				<% end %>
+				<%= link_to_add_association 'Add Ingredient', f, :recipe_ingredients %>
+			</div>
+			
+			<!-- Nutrition Fields -->
+			<div class="col-3 border border-black border-1 rounded-2 p-2">
+				<h2>Nutrition Info</h2>
+				<%= f.fields_for :recipe_nutrients do |nutrient| %>
+					<%= render 'recipe_nutrient_fields', f: nutrient %>
+				<% end %>
+				<%= link_to_add_association 'Add Nutrient', f, :recipe_nutrients %>
 			</div>
 		</div>
 		
-		<div id="section-fields" class="col">
-			<h2>Content</h2>
-			<div>
-				<%= f.semantic_fields_for :section do |section| %>
-				<%= render 'section_fields', f: section %>
-					<%= link_to_add_association 'Add Section', f, :sections %>
+		<!-- Tag Fields -->
+		<div class="row border border-black border-1 rounded-2 m-2">
+			<div class="col m-2 p-2">
+				<h2>Tags</h2>
+				<%= f.fields_for :tags do |tag| %>
+					<%= render 'tag_fields', f: tag %>
 				<% end %>
+				<%= link_to_add_association 'Add Tag', f, :tags %>
+			</div>
+		</div>
+		
+		<!-- Section Fields -->
+		<div class="col border border-black border-1 rounded-2 m-2">
+			<div class="col m-2 p-2">
+				<h2>Instructions</h2>
+				<%= f.fields_for :sections do |sf| %>
+					<%= render 'section_fields', f: sf %>
+				<% end %>
+				<%= link_to_add_association 'Add Section', f, :sections %>
 			</div>
 		</div>
 	</div>
 	
+	<!-- Actions -->
 	<div id="form-actions">
-		<%= f.actions do %>
-			<%= f.action :submit, :button_html => { :class => "btn btn-primary", :disable_with => 'Wait...' } %>
-		<% end %>
+		<%= f.submit "Submit" %>
 	</div>
+
 <% end %>

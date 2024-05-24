@@ -1,0 +1,13 @@
+<div data-model="step" data-template="true">
+	<div>
+		<%= f.label :title, "Step Title" %>
+		<%= f.text_field :title %>
+	</div>
+	<div>
+		<%= f.label :content, "Step Content" %>
+		<%= f.text_area :content %>
+	</div>
+	<div>
+		<%= link_to_remove_association 'Remove Step', f %>
+	</div>
+</div>

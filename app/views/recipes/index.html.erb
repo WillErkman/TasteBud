@@ -4,7 +4,7 @@
 <%= link_to "Create Recipe", new_recipe_path, class: "btn btn-outline-primary" %>
 
 <div class="row m-4">
-  <%= render partial: 'card', collection: @recipes, as: :recipe %>
+  <%= render partial: 'recipes/partials/card', collection: @recipes, as: :recipe %>
 </div>
 
 
