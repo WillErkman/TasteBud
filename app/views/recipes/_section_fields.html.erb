@@ -1,24 +1,30 @@
-<div id="sections-fields" class="col m-2 p-2">
-	<div data-model="section" data-template="true">
-		<div class="container border-bottom border-black">
-			<div>
-				<%= f.label :title, "Title" %>
-				<%= f.text_field :title %>
+<div class="container p-1" data-template="section">
+	<div class="row border-bottom border-black m-auto p-2">
+		<div class="col">
+			<div class="row mb-3">
+				<div class="col">
+					<%= f.label :title, "Title", class: "form-label h4" %>
+					<%= f.text_field :title, class: "form-control" %>
+				</div>
 			</div>
-			<div>
-				<%= f.label :description, "Description" %>
-				<%= f.text_area :description %>
+			<div class="row mb-3">
+				<div class="col">
+					<%= f.label :description, "Description", class: "form-label h5" %>
+					<%= f.text_area :description, class: "form-control" %>
+				</div>
 			</div>
 		</div>
-		
-		<!-- Step Fields -->
-		<fieldset id="steps-fields">
-			<%= f.fields :steps do |sf| %>
-				<%= render 'step_fields', f: sf %>
-			<% end %>
-			<%= link_to_add_association 'Add Step', f, :steps %>
-		</fieldset>
-		
-		<%= link_to_remove_association 'Remove Section', f %>
+	</div>
+	
+	<!-- Step Fields -->
+	<div class="row" data-list="step">
+		<%= f.fields :steps do |sf| %>
+			<%= render 'step_fields', f: sf %>
+		<% end %>
+		<%= add_child_button 'Add Step', f, :steps, partial: 'step_fields' %>
+	</div>
+	
+	<div class="row m-auto p-3">
+		<%= remove_child_button 'Remove Section', f %>
 	</div>
 </div>

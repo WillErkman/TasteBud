@@ -25,9 +25,9 @@ class Recipe < ApplicationRecord
 	accepts_nested_attributes_for :tags, allow_destroy: true
 
 	# Validations
-	validates :title, presence: true, length: { in: 3..100 }
+	validates :title, presence: true, length: { maximum: 100 }
 	validates :cook_time, :prep_time, :total_time, length: { maximum: 8 }, allow_blank: true
-	validates :description, length: { maximum: 500 }, allow_blank: true
+	validates :description, length: { maximum: 500 }
 	validates :yield, length: { maximum: 500 }, allow_blank: true
 
 	# Scopes
@@ -37,53 +37,15 @@ class Recipe < ApplicationRecord
 
 	# Methods
 	def tag_names
-		tags.map(&:name)
+		# self.tags.map(&:name)
+		self.tags.pluck(:name)
 	end
 
-	def steps_of(section)
-		section.class == Integer ? self.sections.find(section).steps : self.sections.find(section.id).steps
-	end
-
-	def steps_arr
-		self.sections.map do |section|
-			section.steps
+	def ingredient_attributes
+		self.ingredients.map do |ingredient|
+			ingredient.attributes
 		end
 	end
-
-	# def sections_attributes=(sections_attributes)
-	# 	sections_attributes.values.each do |section_attributes|
-	# 		section = Section.find_or_create_by section_attributes
-	# 		self.sections << section
-	# 	end
-	# end
-	#
-	# def steps_attributes=(steps_attributes)
-	# 	steps_attributes.values.each do |step_attributes|
-	# 		step = Step.find_or_create_by step_attributes
-	# 		self.steps << step
-	# 	end
-	# end
-	#
-	# def recipe_nutrients_attributes=(recipe_nutrients_attributes)
-	# 	recipe_nutrients_attributes.values.each do |recipe_nutrient_attributes|
-	# 		recipe_nutrient = RecipeNutrient.find_or_create_by recipe_nutrient_attributes
-	# 		self.recipe_nutrients << recipe_nutrient
-	# 	end
-	# end
-	#
-	# def recipe_ingredients_attributes=(recipe_ingredients_attributes)
-	# 	recipe_ingredients_attributes.values.each do |recipe_ingredient_attributes|
-	# 		recipe_ingredient = RecipeIngredient.find_or_create_by recipe_ingredient_attributes
-	# 		self.recipe_ingredients << recipe_ingredient
-	# 	end
-	# end
-	#
-	# def tags_attributes=(tags_attributes)
-	# 	tags_attributes.values.each do |tag_attributes|
-	# 		tag = Tag.find_or_create_by tag_attributes
-	# 		self.tags << tag
-	# 	end
-	# end
 
 	private
 

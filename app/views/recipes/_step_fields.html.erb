@@ -1,13 +1,22 @@
-<div data-model="step" data-template="true">
-	<div>
-		<%= f.label :title, "Step Title" %>
-		<%= f.text_field :title %>
-	</div>
-	<div>
-		<%= f.label :content, "Step Content" %>
-		<%= f.text_area :content %>
-	</div>
-	<div>
-		<%= link_to_remove_association 'Remove Step', f %>
+<div class="container p-2 m-auto mb-3 border border-dark-subtle rounded-3" data-template="step">
+	<div class="row">
+		<div class="col d-flex justify-content-center align-items-center m-0 col-1">
+			<%= remove_child_button 'X', f, class: "rounded-2" %>
+		</div>
+		<div class="col-11 m-0">
+			<div class="row my-2">
+				<div class="col m-0">
+					<%= f.label :title, "Title", class: "form-label h5" %>
+					<%= f.text_field :title, class: "form-control" %>
+				</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col m-0">
+					<%= f.label :content, "Content", class: "form-label h6" %>
+					<%= f.text_area :content, class: "form-control" %>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+

@@ -4,73 +4,105 @@
 			<!-- Recipe Fields -->
 			<div class="col-6 border border-black border-1 rounded-2 align-items-baseline p-2">
 				<h2>Recipe Info</h2>
-				<div id="recipe_fields" class="">
+				<div>
 					<div class="row">
 						<div class="col">
 							<div class="d-flex">
-								<%= f.label :title, "Title" %>
-								<%= f.text_field :title, class: "" %>
+								<%= f.label :title, "Title", class: "form-label" %>
+								<%= f.text_field :title, class: "form-control" %>
 							</div>
 							
 							<div class="d-flex">
-								<%= f.label :description, "Description" %>
-								<%= f.text_area :description %>
+								<%= f.label :description, "Description", class: "form-label" %>
+								<%= f.text_area :description, class: "form-control" %>
 							</div>
 						</div>
 						
 						<div class="col">
 							<div class="d-flex">
-								<%= f.label :prep_time, "Prep Time" %>
-								<%= f.text_field :prep_time %>
+								<%= f.label :prep_time, "Prep Time", class: "form-label" %>
+								<%= f.text_field :prep_time, class: "form-control" %>
 							</div>
 							
 							<div class="d-flex">
-								<%= f.label :cook_time, "Cook Time" %>
-								<%= f.text_field :cook_time %>
+								<%= f.label :cook_time, "Cook Time", class: "form-label" %>
+								<%= f.text_field :cook_time, class: "form-control" %>
 							</div>
 							<div></div>
 							
 							<div class="d-flex">
-								<%= f.label :total_time, "Total Time" %>
-								<%= f.text_field :total_time %>
+								<%= f.label :total_time, "Total Time", class: "form-label" %>
+								<%= f.text_field :total_time, class: "form-control" %>
 							</div>
 							
 							<div class="d-flex">
-								<%= f.label :yield, "Yield" %>
-								<%= f.text_field :yield %>
+								<%= f.label :yield, "Yield", class: "form-label" %>
+								<%= f.text_field :yield, class: "form-control" %>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<!-- RecipeIngredients and Ingredient Fields -->
+			<!-- Ingredient Fields -->
 			<div class="col-3 border border-black border-1 rounded-2 p-2">
 				<h2>Ingredients</h2>
-				<%= f.fields_for :recipe_ingredients do |ingredient| %>
-					<%= render 'recipe_ingredient_fields', f: ingredient %>
-				<% end %>
-				<%= link_to_add_association 'Add Ingredient', f, :recipe_ingredients %>
+				<table class="table" data-list="recipe-ingredient">
+					<thead class="table-group-divider">
+					<tr>
+						<th>Name</th>
+						<th colspan="2">Quantity</th>
+					</tr>
+					</thead>
+					<tbody class="align-middle" data-list="recipe-nutrient">
+					<%= f.fields_for :recipe_ingredients do |ingredient| %>
+						<%= render 'recipe_ingredient_fields', f: ingredient %>
+					<% end %>
+					</tbody>
+				</table>
+				<%= add_child_button 'Add Ingredient', f, :recipe_ingredients, partial: 'recipe_ingredient_fields' %>
 			</div>
 			
 			<!-- Nutrition Fields -->
 			<div class="col-3 border border-black border-1 rounded-2 p-2">
 				<h2>Nutrition Info</h2>
-				<%= f.fields_for :recipe_nutrients do |nutrient| %>
-					<%= render 'recipe_nutrient_fields', f: nutrient %>
-				<% end %>
-				<%= link_to_add_association 'Add Nutrient', f, :recipe_nutrients %>
+				<table class="table">
+					<thead class="table-group-divider">
+					<tr>
+						<th>Name</th>
+						<th colspan="3">Quantity</th>
+					</tr>
+					</thead>
+					<tbody class="align-middle" data-list="recipe-nutrient">
+					<%= f.fields_for :recipe_nutrients do |nutrient| %>
+						<%= render 'recipe_nutrient_fields', f: nutrient %>
+					<% end %>
+					</tbody>
+				</table>
+				
+				<%= add_child_button 'Add Nutrient', f, :recipe_nutrients, partial: 'recipe_nutrient_fields' %>
 			</div>
 		</div>
 		
 		<!-- Tag Fields -->
-		<div class="row border border-black border-1 rounded-2 m-2">
-			<div class="col m-2 p-2">
-				<h2>Tags</h2>
-				<%= f.fields_for :tags do |tag| %>
-					<%= render 'tag_fields', f: tag %>
-				<% end %>
-				<%= link_to_add_association 'Add Tag', f, :tags %>
+		<div class="row border border-black border-1 rounded-2 m-2 p-2">
+			<div class="col">
+				<div class="row align-items-center justify-content-start">
+					<div class="col-1">
+						<h3>Tags</h3>
+					</div>
+					<div class="col m-0 d-flex flex-row align-items-center justify-content-start">
+						<div class="me-2" data-list="tag">
+							<%= f.fields_for :tags do |tag| %>
+								<%= render 'tag_fields', f: tag %>
+							<% end %>
+						</div>
+						<div class="col-1">
+							<%= add_child_button 'Add Tag', f, :tags, partial: 'tag_fields', class: "d-block" %>
+						</div>
+					</div>
+				
+				</div>
 			</div>
 		</div>
 		
@@ -78,10 +110,12 @@
 		<div class="col border border-black border-1 rounded-2 m-2">
 			<div class="col m-2 p-2">
 				<h2>Instructions</h2>
-				<%= f.fields_for :sections do |sf| %>
-					<%= render 'section_fields', f: sf %>
-				<% end %>
-				<%= link_to_add_association 'Add Section', f, :sections %>
+				<div data-list="section">
+					<%= f.fields_for :sections do |sf| %>
+						<%= render 'section_fields', f: sf %>
+					<% end %>
+				</div>
+				<%= add_child_button 'Add Section', f, :sections, partial: 'section_fields' %>
 			</div>
 		</div>
 	</div>
@@ -90,5 +124,5 @@
 	<div id="form-actions">
 		<%= f.submit "Submit" %>
 	</div>
-
 <% end %>
+

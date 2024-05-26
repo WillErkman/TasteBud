@@ -10,9 +10,9 @@ class Section < ApplicationRecord
 	accepts_nested_attributes_for :steps, allow_destroy: true
 
 	# Validations
-	validates :title, :description, presence: true
-	validates :title, uniqueness: { scope: :recipe_id }
+	validates :title, presence: true, uniqueness: { scope: :recipe_id }
+	validates :description, length: { maximum: 500 }, allow_blank: true
 
 	# Methods
-	
+
 end

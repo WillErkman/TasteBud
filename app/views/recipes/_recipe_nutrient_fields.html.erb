@@ -1,20 +1,8 @@
-<div id="recipe-nutrients-fields" class="container d-flex">
-	<div data-model="recipe-nutrient" data-template="true">
-		<div>
-			<%= f.fields_for :nutrient_attributes do |nf| %>
-				<%= nf.label :name, "Nutrient Name" %>
-				<%= nf.text_field :name %>
-			<% end %>
-		</div>
-		<div>
-			<%= f.label :quantity, "Quantity" %>
-			<%= f.text_field :quantity, class: "w-25" %>
-		</div>
-		<div>
-			<%= f.label :unit, "Unit" %>
-			<%= f.text_field :unit, class: "w-25" %>
-		</div>
-	</div>
-	<%= link_to_remove_association 'Remove Nutrient', f %>
-</div>
+<tr data-template="recipe-nutrient">
+	<td><%= render 'nutrient_fields', f: f %></td>
+	<td><%= f.number_field :quantity, class: "form-control" %></td>
+	<td><%= f.select :unit, [%w[g g], %w[mg mg], %w[% percent_daily_value]] %></td>
+	<td><%= remove_child_button 'X', f %></td>
+</tr>
+
 

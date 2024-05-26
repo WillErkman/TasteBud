@@ -5,7 +5,7 @@ class Ingredient < ApplicationRecord
 	has_many :recipes, through: :recipe_ingredients, inverse_of: :ingredients
 
 	# Validations
-	validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { in: 2..100 }
+	validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 100 }
 
 	# Callbacks
 

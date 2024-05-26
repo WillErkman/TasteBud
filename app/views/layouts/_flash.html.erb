@@ -1,7 +1,13 @@
-<% if flash[:notice] %>
-	<div class="alert alert-success"><%= flash[:notice] %></div>
+<% if flash.notice %>
+	<div class="alert alert-success">
+		<%= flash.notice %>
+	</div>
 <% end %>
 
-<% if flash[:alert] %>
-	<div class="alert alert-danger"><%= flash[:alert] %></div>
+<% if flash.alert then %>
+	<div class="alert alert-danger m-2" role="alert">
+		<% flash.alert.each do |alert| %>
+			<br><%= alert %>
+		<% end %>
+	</div>
 <% end %>

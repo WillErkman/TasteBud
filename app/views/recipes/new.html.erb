@@ -1,12 +1,9 @@
-<div class="container">
+<div class="container-fluid d-flex flex-column p-3 m-2">
 	<h1 class="my-2 p-2 border-bottom border-2 border-black">New Recipe</h1>
-	<div class="container-fluid">
+	<div class="row">
 		<%= render "form", recipe: @recipe %>
 	</div>
-	
-	<br>
-	
-	<div>
-		<%= link_to "Back to ingredients", recipes_path %>
+	<div class="row">
+		<%= link_to "Cancel", recipes_path, class: "btn btn-danger" %>
 	</div>
 </div>

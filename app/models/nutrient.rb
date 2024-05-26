@@ -7,6 +7,6 @@ class Nutrient < ApplicationRecord
 	normalizes :name, with: -> name { name.downcase.strip }
 
 	# Validations
-	validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { in: 2..100 }
+	validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 100 }
 
 end
