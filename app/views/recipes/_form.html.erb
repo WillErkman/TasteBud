@@ -60,7 +60,7 @@
 					<% end %>
 					</tbody>
 				</table>
-				<%= add_child_button 'Add Ingredient', f, :recipe_ingredients, object: new_recipe_ingredient, partial: 'recipe_ingredient_fields', class: "btn btn-primary" %>
+				<%= add_child_button 'Add Ingredient', f, :recipe_ingredients, object: new_recipe_ingredient, partial: 'recipe_ingredient_fields', class: "btn btn-primary", table: true %>
 			</div>
 			
 			<!-- Nutrition Fields -->
@@ -79,7 +79,7 @@
 					<% end %>
 					</tbody>
 				</table>
-				<%= add_child_button 'Add Nutrient', f, :recipe_nutrients, object: new_recipe_nutrient, partial: 'recipe_nutrient_fields', class: "btn btn-primary" %>
+				<%= add_child_button 'Add Nutrient', f, :recipe_nutrients, object: new_recipe_nutrient, partial: 'recipe_nutrient_fields', class: "btn btn-primary", table: true %>
 			</div>
 		</div>
 		

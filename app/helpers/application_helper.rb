@@ -30,14 +30,14 @@ module ApplicationHelper
 	# 		dynamic_forms_template_param: h(fields) },
 	# 	                    class: options[:class])
 	# end
+
+	# options: *table* if element is a table row
 	def add_child_button(text, f, association_name, options = {})
 		options[:class] ||= ""
 		fields = new_child_fields(f, association_name, options)
-		button = button_tag(text, type: "button", data: {
-			action: 'dynamic-forms#addToForm',
-			association: association_name },
-		                    class: options[:class])
-		template = content_tag(:div, fields, data: { dynamic_forms_target: "template" }, class: "d-none")
+		button = button_tag(text, type: "button", data: { action: 'dynamic-forms#addToForm', association: association_name }, class: options[:class])
+		tag = options[:table] ? :table : :div
+		template = content_tag(tag, fields, data: { dynamic_forms_target: "template" }, class: "d-none")
 		content_tag(:div, template + button)
 	end
 
