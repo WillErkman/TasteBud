@@ -17,11 +17,11 @@ class RecipesController < ApplicationController
 		@recipe = Recipe.build
 		@section = @recipe.sections.build
 		@step = @section.steps.build
-		@recipe_ingredient = @recipe.recipe_ingredients.build
-		@recipe_nutrient = @recipe.recipe_nutrients.build
-		@tags = @recipe.tags.build
-		@ingredient = @recipe_ingredient.build_ingredient
-		@nutrient = @recipe_nutrient.build_nutrient
+		# @recipe_ingredient = @recipe.recipe_ingredients.build
+		# @recipe_nutrient = @recipe.recipe_nutrients.build
+		# @tags = @recipe.tags.build
+		# @ingredient = @recipe_ingredient.build_ingredient
+		# @nutrient = @recipe_nutrient.build_nutrient
 	end
 
 	def edit

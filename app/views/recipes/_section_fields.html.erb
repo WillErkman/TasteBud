@@ -1,4 +1,4 @@
-<div class="container p-1" data-template="section">
+<div class="container p-1">
 	<div class="row border-bottom border-black m-auto p-2">
 		<div class="col">
 			<div class="row mb-3">
@@ -17,11 +17,13 @@
 	</div>
 	
 	<!-- Step Fields -->
-	<div class="row" data-list="step">
-		<%= f.fields :steps do |sf| %>
-			<%= render 'step_fields', f: sf %>
-		<% end %>
-		<%= add_child_button 'Add Step', f, :steps, partial: 'step_fields' %>
+	<div class="row" data-controller="dynamic-forms">
+		<div data-dynamic-forms-target="list">
+			<%= f.fields :steps do |sf| %>
+				<%= render 'step_fields', f: sf %>
+			<% end %>
+		</div>
+		<%= add_child_button 'Add Step', f, :steps, partial: 'step_fields', class: "btn btn-primary" %>
 	</div>
 	
 	<div class="row m-auto p-3">

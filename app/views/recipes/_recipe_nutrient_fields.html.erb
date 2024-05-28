@@ -1,4 +1,4 @@
-<tr data-template="recipe-nutrient">
+<tr data-dynamic-forms-target="item">
 	<td><%= render 'nutrient_fields', f: f %></td>
 	<td><%= f.number_field :quantity, class: "form-control" %></td>
 	<td><%= f.select :unit, [%w[g g], %w[mg mg], %w[% percent_daily_value]] %></td>

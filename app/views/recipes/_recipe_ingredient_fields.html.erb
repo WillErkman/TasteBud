@@ -1,4 +1,4 @@
-<tr data-template="recipe-ingredient">
+<tr data-dynamic-forms-target="item">
 	<td><%= render 'ingredient_fields', f: f %></td>
 	<td><%= f.number_field :quantity, class: "form-control" %></td>
 	<td><%= remove_child_button 'X', f %></td>
