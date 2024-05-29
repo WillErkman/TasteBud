@@ -1,4 +1,4 @@
-<div class="container p-1">
+<div class="container p-1" data-dynamic-forms-target="item">
 	<div class="row border-bottom border-black m-auto p-2">
 		<div class="col">
 			<div class="row mb-3">
@@ -17,16 +17,16 @@
 	</div>
 	
 	<!-- Step Fields -->
-	<div class="row" data-controller="dynamic-forms">
-		<div data-dynamic-forms-target="list">
+	<div class="row" data-controller="dynamic-forms" data-dynamic-forms-count-value="1">
+		<fieldset data-dynamic-forms-target="list">
 			<%= f.fields :steps do |sf| %>
 				<%= render 'step_fields', f: sf %>
 			<% end %>
-		</div>
+		</fieldset>
 		<%= add_child_button 'Add Step', f, :steps, partial: 'step_fields', class: "btn btn-primary" %>
 	</div>
 	
 	<div class="row m-auto p-3">
-		<%= remove_child_button 'Remove Section', f %>
+		<%= remove_child_button 'Remove Section', f, class: "btn btn-outline-danger btn-sm remove-child-button" %>
 	</div>
 </div>

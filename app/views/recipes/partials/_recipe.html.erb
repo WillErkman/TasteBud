@@ -1,19 +1,10 @@
 <div id="<%= dom_id recipe %>">
-	
 	<%= render partial: 'recipes/partials/header', locals: { recipe: recipe } %>
 	
-	<div class="row">
-		<div class="col">
-			<%= render partial: 'recipes/partials/ingredients', locals: { ingredients: recipe.recipe_ingredients } %>
-		</div>
-		
-		<div class="col">
-			<%= render partial: 'recipes/partials/nutrition', locals: { nutrients: recipe.recipe_nutrients } %>
-		</div>
-	</div>
+	<%= render partial: 'recipes/partials/ingredients', locals: { ingredients: recipe.recipe_ingredients } %>
 	
-	<div class="row">
-		<%= render recipe.sections %>
-	</div>
+	<%= render partial: 'recipes/partials/nutrition', locals: { nutrients: recipe.recipe_nutrients } %>
+	
+	<%= render recipe.sections %>
 </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_23_234049) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_030620) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -67,6 +67,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_234049) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "recipe_id"
+    t.string "unit"
+    t.string "notes"
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
     t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
   end
@@ -78,6 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_234049) do
     t.integer "unit", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "percent_daily_value"
     t.index ["nutrient_id"], name: "index_recipe_nutrients_on_nutrient_id"
     t.index ["recipe_id"], name: "index_recipe_nutrients_on_recipe_id"
   end

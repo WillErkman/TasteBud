@@ -1,11 +1,11 @@
-<div class="container border border-dark-subtle rounded-3 m-0">
+<div class="container border border-dark-subtle rounded-3 m-0" data-dynamic-forms-target="item">
 	<div class="col-3 p-2 w-100">
 		<div class="row align-items-center justify-content-start">
 			<div class="col-10 m-0 p-0">
 				<%= f.text_field :name, class: "form-control h-100 rounded-end-0" %>
 			</div>
 			<div class="col-2 m-0 p-0">
-				<%= remove_child_button 'X', f, class: "m-auto rounded-start-0 rounded-end-2 d-block" %>
+				<%= remove_child_button 'X', f, class: "btn btn-outline-danger btn-sm remove-child-button m-auto rounded-start-0 rounded-end-2 d-block" %>
 			</div>
 		</div>
 	</div>

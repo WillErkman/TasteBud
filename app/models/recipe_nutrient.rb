@@ -7,8 +7,7 @@ class RecipeNutrient < ApplicationRecord
 	# Unit enum
 	enum unit: {
 		g: 0,
-		mg: 1,
-		percent: 2
+		mg: 1
 	}
 
 	# Callbacks
@@ -17,7 +16,8 @@ class RecipeNutrient < ApplicationRecord
 	# Validations
 	validates :nutrient_id, uniqueness: { scope: :recipe_id, message: "has already been added to the recipe" }
 	validates :quantity, numericality: { only_integer: true, greater_than: 0 }
-	validates :unit, numericality: { only_integer: true, in: 0..2 }
+	validates :unit, numericality: { only_integer: true, in: 0..1 }
+	validates :percent_daily_value, numericality: { only_integer: true }
 
 	# Methods
 

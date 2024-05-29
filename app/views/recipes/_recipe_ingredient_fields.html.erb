@@ -1,5 +1,5 @@
 <tr data-dynamic-forms-target="item">
 	<td><%= render 'ingredient_fields', f: f %></td>
 	<td><%= f.number_field :quantity, class: "form-control" %></td>
-	<td><%= remove_child_button 'X', f %></td>
+	<td><%= remove_child_button 'X', f, class: "btn btn-outline-danger btn-sm remove-child-button" %></td>
 </tr>

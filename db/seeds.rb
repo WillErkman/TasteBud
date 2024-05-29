@@ -18,7 +18,10 @@ end
 
 def recipe_ingredients_params # Returns array of populated RecipeIngredient params hashes
 	INGREDIENT_COUNT.times.map do
-		{ quantity: Faker::Food.measurement,
+		quantity, unit = Faker::Food.measurement.split(" ")
+		{ quantity: quantity,
+		  unit: unit,
+		  notes: Faker::Lorem.sentence,
 		  ingredient_attributes: { name: Faker::Food.ingredient,
 		                           description: Faker::Food.description } }
 	end

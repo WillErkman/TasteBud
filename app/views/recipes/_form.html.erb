@@ -45,75 +45,70 @@
 			</div>
 			
 			<!-- Ingredient Fields -->
-			<div class="col-3 border border-black border-1 rounded-2 p-2" data-controller="dynamic-forms">
+			<fieldset class="col-3 border border-black border-1 rounded-2 p-2" data-controller="dynamic-forms">
 				<h2>Ingredients</h2>
-				<table class="table">
+				<table class="table align-middle" data-dynamic-forms-target="list" data-dynamic-forms-count-value="0">
 					<thead class="table-group-divider">
 					<tr>
 						<th>Name</th>
 						<th colspan="2">Quantity</th>
 					</tr>
 					</thead>
-					<tbody class="align-middle" data-dynamic-forms-target="list">
 					<%= f.fields_for :recipe_ingredients do |ingredient| %>
 						<%= render 'recipe_ingredient_fields', f: ingredient %>
 					<% end %>
-					</tbody>
 				</table>
 				<%= add_child_button 'Add Ingredient', f, :recipe_ingredients, object: new_recipe_ingredient, partial: 'recipe_ingredient_fields', class: "btn btn-primary", table: true %>
-			</div>
+			</fieldset>
 			
 			<!-- Nutrition Fields -->
-			<div class="col-3 border border-black border-1 rounded-2 p-2" data-controller="dynamic-forms">
+			<fieldset class="col-3 border border-black border-1 rounded-2 p-2" data-controller="dynamic-forms" data-dynamic-forms-count-value="0">
 				<h2>Nutrition Info</h2>
-				<table class="table">
+				<table class="table align-middle" data-dynamic-forms-target="list">
 					<thead class="table-group-divider">
 					<tr>
 						<th>Name</th>
 						<th colspan="3">Quantity</th>
 					</tr>
 					</thead>
-					<tbody class="align-middle" data-dynamic-forms-target="list">
 					<%= f.fields_for :recipe_nutrients do |nutrient| %>
 						<%= render 'recipe_nutrient_fields', f: nutrient %>
 					<% end %>
-					</tbody>
 				</table>
 				<%= add_child_button 'Add Nutrient', f, :recipe_nutrients, object: new_recipe_nutrient, partial: 'recipe_nutrient_fields', class: "btn btn-primary", table: true %>
-			</div>
+			</fieldset>
 		</div>
 		
 		<!-- Tag Fields -->
-		<div class="row border border-black border-1 rounded-2 m-2 p-2" data-controller="dynamic-forms">
+		<div class="row border border-black border-1 rounded-2 m-2 p-2">
 			<div class="col">
-				<div class="row align-items-center justify-content-start">
+				<div class="row align-items-center justify-content-start" data-controller="dynamic-forms" data-dynamic-forms-count-value="0">
 					<div class="col-1">
 						<h3>Tags</h3>
 					</div>
 					<div class="col m-0 d-flex flex-row align-items-center justify-content-start">
-						<div class="me-2 tag-list" data-dynamic-forms-target="list">
+						<fieldset class="me-2 d-flex flex-row" data-dynamic-forms-target="list">
 							<%= f.fields_for :tags do |tag| %>
 								<%= render 'tag_fields', f: tag %>
 							<% end %>
-						</div>
+						</fieldset>
 						<div class="col-1">
 							<%= add_child_button 'Add Tag', f, :tags, object: new_tag, partial: 'tag_fields', class: "btn btn-primary" %>
 						</div>
 					</div>
-				
 				</div>
 			</div>
 		</div>
 		
 		<!-- Section Fields -->
-		<div class="col border border-black border-1 rounded-2 m-2" data-controller="dynamic-forms">
+		<div class="col border border-black border-1 rounded-2 m-2" data-controller="dynamic-forms" data-dynamic-forms-count-value="1">
 			<div class="col m-2 p-2">
 				<h2>Instructions</h2>
-				<div class="section-list" data-dynamic-forms-target="list">
+				<fieldset data-dynamic-forms-target="list">
 					<%= f.fields_for :sections do |sf| %>
 						<%= render partial: 'section_fields', locals: { f: sf } %>
 					<% end %>
-				</div>
+				</fieldset>
 				<%= add_child_button 'Add Section', f, :sections, object: new_section, partial: 'section_fields', class: "btn btn-primary" %>
 			</div>
 		</div>
