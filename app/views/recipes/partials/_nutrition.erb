@@ -1,20 +1,25 @@
-<div class="container bg-light w-75 p-3">
-	<h3 class="text-center p-1">Nutrition Info</h3>
-	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#nutritionInfo" aria-expanded="false" aria-controls="nutritionInfo">Toggle
-		Nutrition Info
-	</button>
-	
-	<table class="table">
+<div class="container p-3">
+	<table class="table" data-controller="toggle" data-toggle-toggled-value="false" data-toggle-toggled-class="d-none">
+		<thead>
 		<tr>
-			<th>Nutrient</th>
-			<th>Quantity</th>
+			<th colspan=2" class="fs-3">
+				<a class="fs-3 text-decoration-none text-black" data-action="click->toggle#toggleWithIcon">
+				<span class="d-flex justify-content-between align-items-center">Nutrition Facts<i class="bi-chevron-down" data-toggle-target="icon" style=" color: cornflowerblue;"></i>
+				</span>
+				</a></th>
+		</tr>
+		</thead>
+		<tbody data-toggle-target="item">
+		<tr>
+			<td colspan="2" class="text-end fs-5">% Daily Value</td>
 		</tr>
 		<% nutrients.each do |nutrient| %>
 			<tr>
-				<td><%= nutrient.nutrient.name.capitalize %></td>
-				<td><%= nutrient.quantity %> <%= nutrient.unit %></td>
+				<td><b><%= nutrient.nutrient.name.capitalize %></b> <%= nutrient.quantity %><%= nutrient.unit %></td>
+				<td class="text-end"><%= nutrient.percent_daily_value %>%</td>
 			</tr>
 		<% end %>
+		</tbody>
 	</table>
 </div>
 

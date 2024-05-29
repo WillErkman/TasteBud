@@ -87,7 +87,7 @@
 						<h3>Tags</h3>
 					</div>
 					<div class="col m-0 d-flex flex-row align-items-center justify-content-start">
-						<fieldset class="me-2 d-flex flex-row" data-dynamic-forms-target="list">
+						<fieldset class="me-2 row" data-dynamic-forms-target="list">
 							<%= f.fields_for :tags do |tag| %>
 								<%= render 'tag_fields', f: tag %>
 							<% end %>

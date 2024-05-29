@@ -13,9 +13,6 @@ export default class extends Controller {
 		let newNode = this.templateTarget.firstChild.cloneNode( true );
 		newNode.id = Date.now();
 		this.listTarget.insertAdjacentElement( "beforeend", newNode )
-		// console.log( this.templateTarget.firstChild )
-		console.log( this.countValue )
-
 	}
 
 	removeFromForm( e ) {

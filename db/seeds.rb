@@ -46,8 +46,9 @@ end
 def recipe_nutrients_params
 	Faker::Food.unique.clear
 	NUTRIENTS_COUNT.times.map do
-		{ quantity: Faker::Number.between(from: 1, to: 999),
-		  unit: Faker::Number.between(from: 0, to: 2),
+		{ quantity: Faker::Number.between(from: 1, to: 400),
+		  unit: Faker::Number.between(from: 0, to: 1),
+		  percent_daily_value: Faker::Number.between(from: 0, to: 110),
 		  nutrient_attributes: { name: Faker::Food.unique.dish } }
 	end
 end
